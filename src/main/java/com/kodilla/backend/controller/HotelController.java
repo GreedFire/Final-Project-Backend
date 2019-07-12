@@ -27,7 +27,7 @@ public class HotelController {
     private HotelDatabase database;
 
     @GetMapping("/hotels")
-    public HotelSetDto[] getHotels(@RequestParam int rooms, @RequestParam String location,
+    public List<HotelSetDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                        @RequestParam String checkin, @RequestParam String checkout,
                                        @RequestParam int adults){
 

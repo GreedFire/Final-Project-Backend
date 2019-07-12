@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +29,7 @@ public class HotelDto {
     private String shareURL;
 
     @JsonProperty("hotelset")
-    private HotelSetDto[] hotels;
+    private List<HotelSetDto> hotels;
 
     @Override
     public String toString() {
@@ -37,7 +38,7 @@ public class HotelDto {
                 ", currency='" + currency + '\'' +
                 ", destinationLocation='" + destinationLocation + '\'' +
                 ", shareURL='" + shareURL + '\'' +
-                ", hotelSet=" + Arrays.toString(hotels) +
+                ", hotels=" + hotels +
                 '}';
     }
 }

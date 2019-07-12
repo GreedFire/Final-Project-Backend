@@ -18,18 +18,36 @@ import java.util.stream.Collectors;
 public class HotelMapper {
 
     public HotelEntity mapToHotelEntity(HotelDto hotelDto){
-        return new HotelEntity(
+        HotelEntity hotelResponseResult = new HotelEntity(
                 hotelDto.getSearchId(),
                 hotelDto.getCurrency(),
                 hotelDto.getDestinationLocation(),
-                hotelDto.getShareURL(),
-                mapToHotelSetEntity(hotelDto.getHotels())
+                hotelDto.getShareURL()
         );
+
+        List<HotelSetEntity> hotelListEntity = hotelDto.getHotels().stream()
+                .map(hotelset -> new HotelSetEntity(
+                        hotelset.getId(),
+                        Double.parseDouble(hotelset.getUserRating()),
+                        new BigDecimal(hotelset.getPrice().substring(1)),
+                        hotelset.getStars(),
+                        hotelset.getName(),
+                        hotelset.getPhone(),
+                        hotelset.getAddress(),
+                        hotelset.getCity(),
+                        hotelset.getCountry(),
+                        hotelset.getDisplayaddress(),
+                        hotelset.getThumburl(),
+                        hotelResponseResult
+                )).collect(Collectors.toList());
+
+        hotelResponseResult.setHotels(hotelListEntity);
+
+         return hotelResponseResult;
     }
 
-    public HotelSetEntity[] mapToHotelSetEntity(HotelSetDto[] hotelSetDto){
-        List<HotelSetDto> temporaryList = new ArrayList<>(Arrays.asList(hotelSetDto));
-         List<HotelSetEntity> list = temporaryList.stream()
+    public List<HotelSetEntity> mapToHotelSetEntity(List<HotelSetDto> hotels){
+         List<HotelSetEntity> result = hotels.stream()
                 .map(hotelset -> new HotelSetEntity(
                         hotelset.getId(),
                         Double.parseDouble(hotelset.getUserRating()),
@@ -43,8 +61,7 @@ public class HotelMapper {
                         hotelset.getDisplayaddress(),
                         hotelset.getThumburl()
                 )).collect(Collectors.toList());
-         HotelSetEntity[] result = new HotelSetEntity[list.size()];
-         return list.toArray(result);
+         return result;
     }
 
     public HotelLocationEntity mapToHotelLocations(HotelLocationDto hotelLocationDto, String writedCity){

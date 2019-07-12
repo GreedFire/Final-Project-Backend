@@ -80,7 +80,7 @@ public class KayakClient {
 
             if(response.getBody() != null){
                 LOGGER.info("Saving hotels to database: ");
-               // hotelDatabase.saveHotel(hotelMapper.mapToHotelEntity(response.getBody()));
+                hotelDatabase.saveHotel(hotelMapper.mapToHotelEntity(response.getBody()));
             }
 
 

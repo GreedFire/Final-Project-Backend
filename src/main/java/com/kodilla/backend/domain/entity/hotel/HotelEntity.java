@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,5 +23,13 @@ public class HotelEntity {
 
     private String shareURL;
 
-    private HotelSetEntity[] hotels;
+    @OneToMany(targetEntity = HotelSetEntity.class, mappedBy = "hotelResponse", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<HotelSetEntity> hotels;
+
+    public HotelEntity(String searchId, String currency, String destinationLocation, String shareURL) {
+        this.searchId = searchId;
+        this.currency = currency;
+        this.destinationLocation = destinationLocation;
+        this.shareURL = shareURL;
+    }
 }

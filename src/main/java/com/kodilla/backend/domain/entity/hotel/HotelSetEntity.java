@@ -37,7 +37,9 @@ public class HotelSetEntity {
 
     private String thumburl;
 
-    private HotelEntity hotelEntity;
+    @ManyToOne
+    @JoinColumn(name = "HotelResponse_ID")
+    private HotelEntity hotelResponse;
 
     public HotelSetEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl) {
         this.id = id;
