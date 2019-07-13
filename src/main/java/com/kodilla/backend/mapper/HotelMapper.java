@@ -1,32 +1,29 @@
 package com.kodilla.backend.mapper;
 
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
+import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
-import com.kodilla.backend.domain.dto.hotel.HotelSetDto;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
-import com.kodilla.backend.domain.entity.hotel.HotelSetEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class HotelMapper {
 
-    public HotelEntity mapToHotelEntity(HotelDto hotelDto){
+    public HotelEntity mapToHotelEntity(HotelDto hotelDto) {
         HotelEntity hotelResponseResult = new HotelEntity(
                 hotelDto.getSearchId(),
                 hotelDto.getCurrency(),
                 hotelDto.getDestinationLocation(),
                 hotelDto.getShareURL()
         );
-
-        List<HotelSetEntity> hotelListEntity = hotelDto.getHotels().stream()
-                .map(hotelset -> new HotelSetEntity(
+        List<HotelListEntity> hotelListEntity = hotelDto.getHotels().stream()
+                .map(hotelset -> new HotelListEntity(
                         hotelset.getId(),
                         Double.parseDouble(hotelset.getUserRating()),
                         new BigDecimal(hotelset.getPrice().substring(1)),
@@ -40,18 +37,16 @@ public class HotelMapper {
                         hotelset.getThumburl(),
                         hotelResponseResult
                 )).collect(Collectors.toList());
-
         hotelResponseResult.setHotels(hotelListEntity);
-
-         return hotelResponseResult;
+        return hotelResponseResult;
     }
 
-    public List<HotelSetEntity> mapToHotelSetEntity(List<HotelSetDto> hotels){
-         List<HotelSetEntity> result = hotels.stream()
-                .map(hotelset -> new HotelSetEntity(
+    public List<HotelListDto> mapToHotelSetDtoList(List<HotelListEntity> list) {
+        return list.stream()
+                .map(hotelset -> new HotelListDto(
                         hotelset.getId(),
-                        Double.parseDouble(hotelset.getUserRating()),
-                        new BigDecimal(hotelset.getPrice().substring(1)),
+                        String.valueOf(hotelset.getUserRating()),
+                        String.valueOf(hotelset.getPrice()),
                         hotelset.getStars(),
                         hotelset.getName(),
                         hotelset.getPhone(),
@@ -61,13 +56,52 @@ public class HotelMapper {
                         hotelset.getDisplayaddress(),
                         hotelset.getThumburl()
                 )).collect(Collectors.toList());
-         return result;
     }
 
-    public HotelLocationEntity mapToHotelLocations(HotelLocationDto hotelLocationDto, String writedCity){
-       return new HotelLocationEntity(
-               hotelLocationDto.getCityId(),
-               writedCity
-       );
+    public HotelDto mapToHotelDto(HotelEntity hotelEntity) {
+        HotelDto hotelDto = new HotelDto(
+                hotelEntity.getSearchId(),
+                hotelEntity.getCurrency(),
+                hotelEntity.getDestinationLocation(),
+                hotelEntity.getShareURL()
+        );
+        List<HotelListDto> hotelListDto = hotelEntity.getHotels().stream()
+                .map(hotelset -> new HotelListDto(
+                        hotelset.getId(),
+                        String.valueOf(hotelset.getUserRating()),
+                        String.valueOf(hotelset.getPrice()),
+                        hotelset.getStars(),
+                        hotelset.getName(),
+                        hotelset.getPhone(),
+                        hotelset.getAddress(),
+                        hotelset.getCity(),
+                        hotelset.getCountry(),
+                        hotelset.getDisplayaddress(),
+                        hotelset.getThumburl()
+                )).collect(Collectors.toList());
+        hotelDto.setHotels(hotelListDto);
+        return hotelDto;
+    }
+
+    public HotelLocationEntity mapToHotelLocationsEntity(HotelLocationDto hotelLocationDto, String writedCity) {
+        return new HotelLocationEntity(
+                hotelLocationDto.getCityId(),
+                writedCity
+        );
+    }
+
+    public HotelLocationDto mapToHotelLocationsDto(HotelLocationEntity hotelLocationEntity) {
+        return new HotelLocationDto(
+                hotelLocationEntity.getCityId()
+        );
+    }
+
+    public List<HotelLocationEntity> mapToHotelLocationEntityList(List<HotelLocationDto> hotelLocationDtoList, String writedLocation) {
+        return hotelLocationDtoList.stream()
+                .map(location -> new HotelLocationEntity(
+                        location.getCityId(),
+                        writedLocation
+                ))
+                .collect(Collectors.toList());
     }
 }

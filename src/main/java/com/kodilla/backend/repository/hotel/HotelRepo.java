@@ -1,4 +1,4 @@
-package com.kodilla.backend.repository;
+package com.kodilla.backend.repository.hotel;
 
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import org.springframework.data.repository.CrudRepository;
@@ -8,11 +8,9 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface HotelEntityDao extends CrudRepository<HotelEntity, String> {
+public interface HotelRepo extends CrudRepository<HotelEntity, String> {
     @Override
     HotelEntity save(HotelEntity entity);
 
+
 }
-
-
-// SPRAWDŹ CZY TABLICE MOZNA ZAMIENIC NA LISTY

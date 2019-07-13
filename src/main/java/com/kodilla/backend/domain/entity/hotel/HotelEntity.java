@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "HotelResponse")
+@Table(name = "HOTEL_RESPONSES")
 public class HotelEntity {
 
     @Id
@@ -23,8 +23,8 @@ public class HotelEntity {
 
     private String shareURL;
 
-    @OneToMany(targetEntity = HotelSetEntity.class, mappedBy = "hotelResponse", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<HotelSetEntity> hotels;
+    @OneToMany(targetEntity = HotelListEntity.class, mappedBy = "hotelResponse", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<HotelListEntity> hotels;
 
     public HotelEntity(String searchId, String currency, String destinationLocation, String shareURL) {
         this.searchId = searchId;

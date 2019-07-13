@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "HotelSet")
-public class HotelSetEntity {
+@Table(name = "HOTELS")
+public class HotelListEntity {
 
     @Id
     private String id;
@@ -41,7 +41,7 @@ public class HotelSetEntity {
     @JoinColumn(name = "HotelResponse_ID")
     private HotelEntity hotelResponse;
 
-    public HotelSetEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl) {
+    public HotelListEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl) {
         this.id = id;
         this.userRating = userRating;
         this.price = price;

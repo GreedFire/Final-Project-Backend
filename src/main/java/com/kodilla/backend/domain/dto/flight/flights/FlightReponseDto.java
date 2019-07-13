@@ -6,20 +6,22 @@ import com.kodilla.backend.domain.dto.flight.flights.lists.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.flights.lists.FlightPlacesDto;
 import com.kodilla.backend.domain.dto.flight.flights.lists.FlightQuotesDto;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FlightReponseDto {
     @JsonProperty("Quotes")
-    private FlightQuotesDto[] quotes;
+    private List<FlightQuotesDto> quotes;
 
     @JsonProperty("Places")
-    private FlightPlacesDto[] places;
+    private List<FlightPlacesDto> places;
 
     @JsonProperty("Carriers")
-    private FlightCarriersDto[] carriers;
+    private List<FlightCarriersDto> carriers;
 }

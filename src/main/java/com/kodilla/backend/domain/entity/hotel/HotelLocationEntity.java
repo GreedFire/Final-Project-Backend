@@ -10,12 +10,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "HotelLocation")
+@Table(name = "HOTELS_LOCATIONS")
 public class HotelLocationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
     private int cityId;
 

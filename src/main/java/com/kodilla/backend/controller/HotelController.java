@@ -1,8 +1,7 @@
 package com.kodilla.backend.controller;
 
 import com.kodilla.backend.client.kayak.KayakClient;
-import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
-import com.kodilla.backend.domain.dto.hotel.HotelSetDto;
+import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.mapper.HotelMapper;
 import com.kodilla.backend.service.HotelDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +20,22 @@ public class HotelController {
     private KayakClient kayakClient;
 
     @Autowired
-    private HotelMapper hotelMapper;
+    private HotelMapper mapper;
 
     @Autowired
     private HotelDatabase database;
 
     @GetMapping("/hotels")
-    public List<HotelSetDto> getHotels(@RequestParam int rooms, @RequestParam String location,
-                                       @RequestParam String checkin, @RequestParam String checkout,
-                                       @RequestParam int adults){
+    public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
+                                        @RequestParam String checkin, @RequestParam String checkout,
+                                        @RequestParam int adults){
 
         return kayakClient.getHotels(rooms, location, checkin, checkout, adults).getHotels();
+    }
+
+    @GetMapping("/hotels/history")
+    public List<HotelListDto> getHotelSearchHistory(){
+        return mapper.mapToHotelSetDtoList(database.getSearchHistory());
     }
 
     @GetMapping("/hotels/locations")
