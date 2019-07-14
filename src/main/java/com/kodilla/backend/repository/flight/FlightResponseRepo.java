@@ -1,6 +1,6 @@
 package com.kodilla.backend.repository.flight;
 
-import com.kodilla.backend.domain.entity.flight.flights.FlightReponseEntity;
+import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,6 @@
-package com.kodilla.backend.domain.entity.flight.flights;
+package com.kodilla.backend.domain.entity.flight;
 
+import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

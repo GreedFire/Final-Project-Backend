@@ -1,6 +1,6 @@
 package com.kodilla.backend.service;
 
-import com.kodilla.backend.domain.entity.flight.flights.FlightReponseEntity;
+import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import com.kodilla.backend.repository.flight.FlightLocationRepo;
 import com.kodilla.backend.repository.flight.FlightResponseRepo;

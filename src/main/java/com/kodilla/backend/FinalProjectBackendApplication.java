@@ -11,10 +11,10 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - do planes class economic, bussiness, first in dto and entity and frontend and change prices for that
 	// - do filters
 	// - do user register and login
 	// - do booking
 	// - MAYBE do search dropdown menu
+	// - MAYBE GENERATE PRICE RISE DEPENDING ON CARRIER CLASS
 
 }
