@@ -1,12 +1,10 @@
 package com.kodilla.backend.domain.dto.flight;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.kodilla.backend.domain.entity.flight.flights.FlightCarriersEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +15,7 @@ public class FlightDto {
 
     private long id;
 
-    private String departureDate;
+    private LocalDateTime departureDate;
 
     private String origin;
 
@@ -25,13 +23,7 @@ public class FlightDto {
 
     private List<FlightCarriersDto> carriers;
 
-    public FlightDto(String departureDate, String origin, String destination) {
-        this.departureDate = departureDate;
-        this.origin = origin;
-        this.destination = destination;
-    }
-
-    public FlightDto(long id, String departureDate, String origin, String destination) {
+    public FlightDto(long id, LocalDateTime departureDate, String origin, String destination) {
         this.id = id;
         this.departureDate = departureDate;
         this.origin = origin;

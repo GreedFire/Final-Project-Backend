@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class FlightCarriersDto {
 
     private BigDecimal price;
 
-    private String outboundDate;
+    private LocalDateTime departureDate;
 
 
 }

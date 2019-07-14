@@ -7,6 +7,7 @@ import com.kodilla.backend.repository.flight.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +36,13 @@ public class FlightDatabase {
 
     public List<FlightLocationEntity> getFlightLocationByWritedLocation(String writedLocation) {
         return flightLocationRepo.findByWritedLocation(writedLocation);
+    }
+
+    public List<FlightReponseEntity> getFlightsByDepartureDateAndOriginAndDestination(LocalDateTime departureDate, String origin, String destination){
+        return flightResponseRepo.findByDepartureDateAndOriginAndDestination(departureDate, origin, destination);
+    }
+
+    public List<FlightReponseEntity> getSearchHistory(){
+        return flightResponseRepo.findAll();
     }
 }

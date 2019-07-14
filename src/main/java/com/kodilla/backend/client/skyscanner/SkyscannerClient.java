@@ -1,8 +1,8 @@
 package com.kodilla.backend.client.skyscanner;
 
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationResponseDto;
+import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.service.FlightDatabase;
@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,23 +69,27 @@ public class SkyscannerClient {
     public FlightDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate) {
         String originLocation;
         String destinationLocation;
-        FlightDto result = new FlightDto();
+        FlightDto result = null;
         try {
             originLocation = getFlightLocationCode(originPlace);
             destinationLocation = getFlightLocationCode(destinationPlace);
+
             LOGGER.info("Getting information about skyscanner from Skyscanner API");
             ResponseEntity<SkyscannerFlightReponseDto> response = restTemplate.exchange(
                     prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate),
                     HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
+            if(response.getBody() != null)
+                result = mapper.mapToFlightDto(mapper.mapToReponseEntity(response.getBody()));
 
-            if (response.getBody() != null) {
-                LOGGER.info("Saving flights to database: ");
-                //===================
-                result = mapper.mapToFlightDto(database.saveFlightResponse(mapper.mapToReponseEntity(response.getBody())));
-                // multiple same planes here with differences in price (but for now is ok i think)
+            LOGGER.info("Saving flights to database: ");
+            LocalDateTime date = LocalDateTime.parse(response.getBody().getQuotes().get(0).getOutBoundLeg().getDepartureDate());
+            String destination = response.getBody().getPlaces().get(0).getName();
+            String origin = response.getBody().getPlaces().get(1).getName();
+            if (database.getFlightsByDepartureDateAndOriginAndDestination(date, origin, destination).size() == 0) {
+                database.saveFlightResponse(mapper.mapToReponseEntity(response.getBody()));
             }
 
-            return result;
+            return Optional.ofNullable(result).orElse(new FlightDto());
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
             return new FlightDto();
@@ -120,8 +125,6 @@ public class SkyscannerClient {
             return null;
         }
     }
-
-
 
 
 }

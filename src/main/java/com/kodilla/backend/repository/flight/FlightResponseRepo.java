@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Transactional
 @Repository
@@ -12,5 +14,9 @@ public interface FlightResponseRepo extends CrudRepository<FlightReponseEntity, 
 
     @Override
     FlightReponseEntity save(FlightReponseEntity entity);
+
+    List<FlightReponseEntity> findByDepartureDateAndOriginAndDestination(LocalDateTime departureDate, String origin, String destination);
+
+    List<FlightReponseEntity> findAll();
 
 }

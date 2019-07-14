@@ -10,10 +10,7 @@ import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -21,10 +18,27 @@ import java.util.stream.Collectors;
 @Component
 public class FlightMapper {
 
+    public List<FlightDto> mapToFlightDtoList(List<FlightReponseEntity> list){
+        return list.stream().map(entity -> new FlightDto(
+                        entity.getId(),
+                        entity.getDepartureDate(),
+                        entity.getOrigin(),
+                        entity.getDestination(),
+                        entity.getCarriers().stream().map(carrier -> new FlightCarriersDto(
+                                carrier.getId(),
+                                carrier.getCarriedId(),
+                                carrier.getCarrierName(),
+                                carrier.getPrice(),
+                                carrier.getOutboundDate()
+                        )).collect(Collectors.toList())
+                ))
+                .collect(Collectors.toList());
+    }
+
     public FlightDto mapToFlightDto(FlightReponseEntity entity){
         FlightDto result = new FlightDto(
                 entity.getId(),
-                entity.getDepartureDate().toString(),
+                entity.getDepartureDate(),
                 entity.getOrigin(),
                 entity.getDestination()
         );
@@ -35,7 +49,7 @@ public class FlightMapper {
                         carrier.getCarriedId(),
                         carrier.getCarrierName(),
                         carrier.getPrice(),
-                        carrier.getOutboundDate().toString()
+                        carrier.getOutboundDate()
                 )).collect(Collectors.toList());
 
         result.setCarriers(carriers);
