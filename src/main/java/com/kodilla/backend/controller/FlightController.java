@@ -19,9 +19,8 @@ public class FlightController {
     @GetMapping("/flights")
     public FlightDto getFlights(@RequestParam String originPlace,
                                 @RequestParam String destinationPlace,
-                                @RequestParam String outboundPartialDate,
-                                @RequestParam(required = false) String inboundPartialDate){
-        return skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate, inboundPartialDate);
+                                @RequestParam String outboundPartialDate){
+        return skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate);
     }
 
     @GetMapping("/flights/locations")

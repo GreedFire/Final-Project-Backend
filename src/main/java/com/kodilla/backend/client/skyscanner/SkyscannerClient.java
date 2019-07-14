@@ -38,14 +38,10 @@ public class SkyscannerClient {
     @Autowired
     private FlightDatabase database;
 
-    private URI prepareUrlForFlights(String originplace, String destinationplace, String outboundpartialdate, String inboundpartialdate) {
-        if (inboundpartialdate == null)
-            inboundpartialdate = "2019-12-01";
-
+    private URI prepareUrlForFlights(String originplace, String destinationplace, String outboundpartialdate) {
         LOGGER.info("Preparing url for skyscanner search");
         return UriComponentsBuilder.fromHttpUrl(skyscannerConfig.getSkyscannerApiEndpoint() + "browsequotes/v1.0/US/USD/en-US/"
                 + originplace + "/" + destinationplace + "/" + outboundpartialdate)
-                .queryParam("inboundpartialdate", inboundpartialdate)
                 .build().encode().toUri();
 
     }
@@ -69,7 +65,7 @@ public class SkyscannerClient {
 
     //==================================================================================================================
 
-    public FlightDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate, String inboundPartialDate) {
+    public FlightDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate) {
         String originLocation;
         String destinationLocation;
         FlightDto result = new FlightDto();
@@ -78,7 +74,7 @@ public class SkyscannerClient {
             destinationLocation = getFlightLocationCode(destinationPlace);
             LOGGER.info("Getting information about skyscanner from Skyscanner API");
             ResponseEntity<SkyscannerFlightReponseDto> response = restTemplate.exchange(
-                    prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate, inboundPartialDate),
+                    prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate),
                     HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
 
             if (response.getBody() != null) {
