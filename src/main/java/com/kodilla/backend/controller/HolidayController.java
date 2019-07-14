@@ -28,14 +28,8 @@ public class HolidayController {
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
                                  @RequestParam String destinationPlace, @RequestParam String checkin,
                                  @RequestParam String checkout, @RequestParam int adults) {
-        List<HotelListDto> hotels = new ArrayList<>();
-        int counter = 0;
-        while (hotels.size() == 0) {
-            hotels = kayakClient.getHotels(rooms, destinationPlace, checkin, checkout, adults).getHotels();
-            counter++;
-            if(counter == 3)
-                break;
-        }
+
+        List<HotelListDto> hotels = kayakClient.getHotels(rooms, destinationPlace, checkin, checkout, adults).getHotels();
         FlightDto tripFlights = skyscannerClient.getFlights(originPlace, destinationPlace, checkin);
         FlightDto returnFlight = skyscannerClient.getFlights(destinationPlace, originPlace, checkout);
 
