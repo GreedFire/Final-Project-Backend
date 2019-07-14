@@ -1,6 +1,7 @@
 package com.kodilla.backend.controller;
 
-import com.kodilla.backend.domain.dto.flight.flights.FlightReponseDto;
+import com.kodilla.backend.domain.dto.flight.FlightDto;
+import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,10 @@ public class FlightController {
     private SkyscannerClient skyscannerClient;
 
     @GetMapping("/flights")
-    public FlightReponseDto getFlights(@RequestParam String originPlace,
-                                       @RequestParam String destinationPlace,
-                                       @RequestParam String outboundPartialDate,
-                                       @RequestParam(required = false) String inboundPartialDate){
+    public FlightDto getFlights(@RequestParam String originPlace,
+                                @RequestParam String destinationPlace,
+                                @RequestParam String outboundPartialDate,
+                                @RequestParam(required = false) String inboundPartialDate){
         return skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate, inboundPartialDate);
     }
 

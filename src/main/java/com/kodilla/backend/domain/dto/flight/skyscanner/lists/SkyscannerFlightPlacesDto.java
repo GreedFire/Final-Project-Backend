@@ -1,4 +1,4 @@
-package com.kodilla.backend.domain.dto.flight.flights.lists;
+package com.kodilla.backend.domain.dto.flight.skyscanner.lists;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FlightCarriersDto {
+public class SkyscannerFlightPlacesDto {
 
     @JsonProperty("Name")
-    private String carrierName;
+    private String name;
+
+    @JsonProperty("CountryName")
+    private String country;
 }

@@ -1,6 +1,7 @@
 package com.kodilla.backend.client.skyscanner;
 
-import com.kodilla.backend.domain.dto.flight.flights.FlightReponseDto;
+import com.kodilla.backend.domain.dto.flight.FlightDto;
+import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationResponseDto;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import com.kodilla.backend.mapper.FlightMapper;
@@ -41,7 +42,7 @@ public class SkyscannerClient {
         if (inboundpartialdate == null)
             inboundpartialdate = "2019-12-01";
 
-        LOGGER.info("Preparing url for flights search");
+        LOGGER.info("Preparing url for skyscanner search");
         return UriComponentsBuilder.fromHttpUrl(skyscannerConfig.getSkyscannerApiEndpoint() + "browsequotes/v1.0/US/USD/en-US/"
                 + originplace + "/" + destinationplace + "/" + outboundpartialdate)
                 .queryParam("inboundpartialdate", inboundpartialdate)
@@ -50,7 +51,7 @@ public class SkyscannerClient {
     }
 
     private URI prepareUrlForFlightsLocation(String location) {
-        LOGGER.info("Preparing url for flights locations");
+        LOGGER.info("Preparing url for skyscanner locations");
         return UriComponentsBuilder.fromHttpUrl(skyscannerConfig.getSkyscannerApiEndpoint() + "autosuggest/v1.0/US/USD/en-US/")
                 .queryParam("query", location)
                 .build().encode().toUri();
@@ -66,6 +67,34 @@ public class SkyscannerClient {
         return entity;
     }
 
+    //==================================================================================================================
+
+    public FlightDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate, String inboundPartialDate) {
+        String originLocation;
+        String destinationLocation;
+        FlightDto result = new FlightDto();
+        try {
+            originLocation = getFlightLocationCode(originPlace);
+            destinationLocation = getFlightLocationCode(destinationPlace);
+            LOGGER.info("Getting information about skyscanner from Skyscanner API");
+            ResponseEntity<SkyscannerFlightReponseDto> response = restTemplate.exchange(
+                    prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate, inboundPartialDate),
+                    HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
+
+            if (response.getBody() != null) {
+                LOGGER.info("Saving flights to database: ");
+                //===================
+                result = mapper.mapToFlightDto(database.saveFlightResponse(mapper.mapToReponseEntity(response.getBody())));
+                // multiple same planes here with differences in price (but for now is ok i think)
+            }
+
+            return result;
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new FlightDto();
+        }
+    }
+
     public String getFlightLocationCode(String location) {
         String locationCode = null;
         try {
@@ -74,13 +103,13 @@ public class SkyscannerClient {
                 //For now always getting 0
                 locationCode = database.getFlightLocationByWritedLocation(location).get(0).getPlaceId();
             } else {
-                LOGGER.info("Getting flights locations from SkyScanner API");
+                LOGGER.info("Getting skyscanner locations from SkyScanner API");
                 ResponseEntity<FlightLocationResponseDto> response = restTemplate.exchange(
                         prepareUrlForFlightsLocation(location),
                         HttpMethod.GET, prepareHeaders(), FlightLocationResponseDto.class);
 
                 if (response.getBody() != null) {
-                    LOGGER.info("Saving flights locations from SkyScanner API to database");
+                    LOGGER.info("Saving skyscanner locations from SkyScanner API to database");
                     List<FlightLocationEntity> locationEntities = mapper.mapToLocationEntityList(response.getBody().getPlaces(), location);
                     for (FlightLocationEntity entity : locationEntities) {
                         database.saveFlightLocations(entity);
@@ -96,23 +125,7 @@ public class SkyscannerClient {
         }
     }
 
-    public FlightReponseDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate, String inboundPartialDate) {
-        String originLocation;
-        String destinationLocation;
-        try {
-            originLocation = getFlightLocationCode(originPlace);
-            destinationLocation = getFlightLocationCode(destinationPlace);
-            LOGGER.info("Getting information about flights from Skyscanner API");
-            ResponseEntity<FlightReponseDto> response = restTemplate.exchange(
-                    prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate, inboundPartialDate),
-                    HttpMethod.GET, prepareHeaders(), FlightReponseDto.class);
 
-            return Optional.ofNullable(response.getBody()).orElse(new FlightReponseDto());
-        } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return new FlightReponseDto();
-        }
-    }
 
 
 }

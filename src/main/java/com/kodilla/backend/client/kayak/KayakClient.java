@@ -67,6 +67,8 @@ public class KayakClient {
         return new HttpEntity<>(headers);
     }
 
+    //==================================================================================================================
+
     public HotelDto getHotels(int rooms, String location, String checkin, String checkout, int adults) {
         try {
             int citycode = getHotelLocationId(location);

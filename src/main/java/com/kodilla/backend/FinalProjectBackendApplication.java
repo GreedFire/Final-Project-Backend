@@ -10,4 +10,14 @@ public class FinalProjectBackendApplication {
 		SpringApplication.run(FinalProjectBackendApplication.class, args);
 	}
 
+	//TODO:
+	// - map from skyscanner dto to my dto and do needed changes
+	// - last flight search
+	// - do flight search frontend
+	// - do holiday search frontend
+	// - do filters
+	// - do user register and login
+	// - do booking
+	// - MAYBE do search dropdown menu
+
 }
