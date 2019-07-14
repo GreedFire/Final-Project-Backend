@@ -10,6 +10,10 @@ import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -20,7 +24,7 @@ public class FlightMapper {
     public FlightDto mapToFlightDto(FlightReponseEntity entity){
         FlightDto result = new FlightDto(
                 entity.getId(),
-                entity.getDepartureDate(),
+                entity.getDepartureDate().toString(),
                 entity.getOrigin(),
                 entity.getDestination()
         );
@@ -30,7 +34,8 @@ public class FlightMapper {
                         carrier.getId(),
                         carrier.getCarriedId(),
                         carrier.getCarrierName(),
-                        carrier.getPrice()
+                        carrier.getPrice(),
+                        carrier.getOutboundDate().toString()
                 )).collect(Collectors.toList());
 
         result.setCarriers(carriers);
@@ -41,9 +46,11 @@ public class FlightMapper {
     public FlightReponseEntity mapToReponseEntity(SkyscannerFlightReponseDto skyscannerFlightReponseDto) {
         BigDecimal price = new BigDecimal(skyscannerFlightReponseDto.getQuotes().get(0).getPrice().intValue());
         Random generator = new Random();
+        String dateText = skyscannerFlightReponseDto.getQuotes().get(0).getOutBoundLeg().getDepartureDate(); // "2019-09-01T00:00:00" format
+        LocalDateTime date = LocalDateTime.parse(dateText);
 
         FlightReponseEntity reponseEntity = new FlightReponseEntity(
-                skyscannerFlightReponseDto.getQuotes().get(0).getOutBoundLeg().getDepartureDate(),
+                date,
                 skyscannerFlightReponseDto.getPlaces().get(1).getName(),
                 skyscannerFlightReponseDto.getPlaces().get(0).getName()
         );
@@ -53,6 +60,7 @@ public class FlightMapper {
                         carrier.getCarriedId(),
                         carrier.getCarrierName(),
                         price.add(BigDecimal.valueOf(generator.nextInt(11))),
+                        date.plusHours(generator.nextInt(24)).plusMinutes(generator.nextInt(60)),
                         reponseEntity
                 )).collect(Collectors.toList());
 

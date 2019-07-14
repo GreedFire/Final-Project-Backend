@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class FlightReponseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String departureDate;
+    private LocalDateTime departureDate;
 
     private String origin;
 
@@ -27,7 +28,7 @@ public class FlightReponseEntity {
     @OneToMany(targetEntity = FlightCarriersEntity.class, mappedBy = "flightReponseEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FlightCarriersEntity> carriers;
 
-    public FlightReponseEntity(String departureDate, String origin, String destination) {
+    public FlightReponseEntity(LocalDateTime departureDate, String origin, String destination) {
         this.departureDate = departureDate;
         this.origin = origin;
         this.destination = destination;

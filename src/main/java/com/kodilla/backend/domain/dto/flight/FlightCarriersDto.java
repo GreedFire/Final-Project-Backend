@@ -17,11 +17,13 @@ public class FlightCarriersDto {
 
     private long id;
 
-    private int carriedId;
+    private int carrierId;
 
     private String carrierName;
 
     private BigDecimal price;
+
+    private String outboundDate;
 
 
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,20 +25,18 @@ public class FlightCarriersEntity {
 
     private BigDecimal price;
 
+    private LocalDateTime outboundDate;
+
     @ManyToOne
     @JoinColumn(name = "Flight_Response_ID")
     private FlightReponseEntity flightReponseEntity;
 
-    public FlightCarriersEntity(int carriedId, String carrierName, BigDecimal price, FlightReponseEntity flightReponseEntity) {
+    public FlightCarriersEntity(int carriedId, String carrierName, BigDecimal price, LocalDateTime outboundDate, FlightReponseEntity flightReponseEntity) {
         this.carriedId = carriedId;
         this.carrierName = carrierName;
         this.price = price;
+        this.outboundDate = outboundDate;
         this.flightReponseEntity = flightReponseEntity;
     }
-
-    public FlightCarriersEntity(int carriedId, String carrierName, BigDecimal price) {
-        this.carriedId = carriedId;
-        this.carrierName = carrierName;
-        this.price = price;
-    }
 }
+
