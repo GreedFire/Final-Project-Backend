@@ -29,7 +29,6 @@ public class HotelController {
     public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                         @RequestParam String checkin, @RequestParam String checkout,
                                         @RequestParam int adults){
-
         return kayakClient.getHotels(rooms, location, checkin, checkout, adults).getHotels();
     }
 

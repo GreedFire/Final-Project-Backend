@@ -1,7 +1,6 @@
 package com.kodilla.backend.controller;
 
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
 import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.service.FlightDatabase;

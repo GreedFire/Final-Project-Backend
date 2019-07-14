@@ -11,10 +11,7 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - map from skyscanner dto to my dto and do needed changes
-	// - last flight search
-	// - do flight search frontend
-	// - do holiday search frontend
+	// - do planes class economic, bussiness, first in dto and entity and frontend and change prices for that
 	// - do filters
 	// - do user register and login
 	// - do booking
