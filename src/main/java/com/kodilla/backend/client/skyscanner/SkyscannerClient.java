@@ -70,6 +70,7 @@ public class SkyscannerClient {
         String originLocation;
         String destinationLocation;
         FlightDto result = null;
+
         try {
             originLocation = getFlightLocationCode(originPlace);
             destinationLocation = getFlightLocationCode(destinationPlace);

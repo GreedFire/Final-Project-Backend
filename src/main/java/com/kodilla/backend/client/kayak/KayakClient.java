@@ -70,7 +70,7 @@ public class KayakClient {
     //==================================================================================================================
 
     public String getHotels(int rooms, String location, String checkin, String checkout, int adults) {
-        String searchId = null;
+        String searchId = "";
         try {
             int citycode = getHotelLocationId(location);
 
@@ -89,7 +89,7 @@ public class KayakClient {
             return searchId;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return "";
         }
     }
 
