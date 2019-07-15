@@ -31,6 +31,7 @@ public class HolidayController {
     @Autowired
     private HotelDatabase database;
 
+    /*
 
     @GetMapping("/holiday")
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
@@ -43,4 +44,6 @@ public class HolidayController {
 
         return new HolidayDto(hotels, tripFlights, returnFlight);
     }
+
+     */
 }

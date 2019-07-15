@@ -1,5 +1,6 @@
 package com.kodilla.backend.controller;
 
+import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
 import com.kodilla.backend.mapper.FlightMapper;
@@ -27,9 +28,9 @@ public class FlightController {
 
     @GetMapping("/flights")
     public FlightDto getFlights(@RequestParam String originPlace,
-                                @RequestParam String destinationPlace,
-                                @RequestParam String outboundPartialDate){
-        return skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate);
+                                              @RequestParam String destinationPlace,
+                                              @RequestParam String outboundPartialDate){
+        return mapper.mapToFlightDto((database.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate)).get()));
     }
 
     @GetMapping("/flights/locations")

@@ -1,7 +1,9 @@
 package com.kodilla.backend.service;
 
+import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
+import com.kodilla.backend.repository.flight.FlightCarriersRepo;
 import com.kodilla.backend.repository.flight.FlightLocationRepo;
 import com.kodilla.backend.repository.flight.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class FlightDatabase {
 
     @Autowired
     private FlightResponseRepo flightResponseRepo;
+
+    @Autowired
+    private FlightCarriersRepo flightCarriersRepo;
 
     public FlightReponseEntity saveFlightResponse(FlightReponseEntity entity){
         return flightResponseRepo.save(entity);
@@ -44,5 +49,13 @@ public class FlightDatabase {
 
     public List<FlightReponseEntity> getSearchHistory(){
         return flightResponseRepo.findAll();
+    }
+
+    public List<FlightCarriersEntity> getFlightsCariers(long flightResponseId){
+        return flightCarriersRepo.findByFlightReponseEntity_Id(flightResponseId);
+    }
+
+    public Optional<FlightReponseEntity> getFlightResponseById(long id){
+        return flightResponseRepo.findById(id);
     }
 }

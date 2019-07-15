@@ -3,6 +3,7 @@ package com.kodilla.backend.client.skyscanner;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationResponseDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
+import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.service.FlightDatabase;
@@ -66,11 +67,11 @@ public class SkyscannerClient {
 
     //==================================================================================================================
 
-    public FlightDto getFlights(String originPlace, String destinationPlace, String outboundPartialDate) {
+    public long getFlights(String originPlace, String destinationPlace, String outboundPartialDate) {
         String originLocation;
         String destinationLocation;
-        FlightDto result = null;
-
+        FlightReponseEntity entity;
+        long result = 0;
         try {
             originLocation = getFlightLocationCode(originPlace);
             destinationLocation = getFlightLocationCode(destinationPlace);
@@ -79,21 +80,20 @@ public class SkyscannerClient {
             ResponseEntity<SkyscannerFlightReponseDto> response = restTemplate.exchange(
                     prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate),
                     HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
-            if(response.getBody() != null)
-                result = mapper.mapToFlightDto(mapper.mapToReponseEntity(response.getBody()));
 
-            LOGGER.info("Saving flights to database: ");
-            LocalDateTime date = LocalDateTime.parse(response.getBody().getQuotes().get(0).getOutBoundLeg().getDepartureDate());
-            String destination = response.getBody().getPlaces().get(0).getName();
-            String origin = response.getBody().getPlaces().get(1).getName();
-            if (database.getFlightsByDepartureDateAndOriginAndDestination(date, origin, destination).size() == 0) {
-                database.saveFlightResponse(mapper.mapToReponseEntity(response.getBody()));
+            if(response.getBody() != null) {
+                entity = mapper.mapToReponseEntity(response.getBody());
+                LOGGER.info("Saving flights to database");
+                if(database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).size() == 0){
+                    database.saveFlightResponse(entity);
+                    result = entity.getId();
+                }
+                else result = database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).get(0).getId();
             }
-
-            return Optional.ofNullable(result).orElse(new FlightDto());
+            return result;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return new FlightDto();
+            return 0;
         }
     }
 

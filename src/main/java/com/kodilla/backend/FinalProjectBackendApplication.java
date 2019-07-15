@@ -11,7 +11,8 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - do filters
+	// - fix flight History, change it to List of objects
+	// - do filters on flightView
 	// - do user register and login
 	// - do booking
 	// - MAYBE do search dropdown menu

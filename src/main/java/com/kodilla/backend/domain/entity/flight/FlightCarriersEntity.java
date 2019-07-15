@@ -41,5 +41,6 @@ public class FlightCarriersEntity {
         this.carrierClass = carrierClass;
         this.flightReponseEntity = flightReponseEntity;
     }
+
 }
 

@@ -2,8 +2,9 @@ package com.kodilla.backend.mapper;
 
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationDto;
+import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
+import com.kodilla.backend.domain.dto.flight.skyscanner.lists.SkyscannerFlightCarriersDto;
 import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -22,25 +24,36 @@ public class FlightMapper {
     private final String ECONOMIC = "economic";
     private final String FIRST = "first";
 
-    public List<FlightDto> mapToFlightDtoList(List<FlightReponseEntity> list){
+    public List<FlightCarriersDto> mapToFlightCarriersListDto(List<FlightCarriersEntity> carriers) {
+        return carriers.stream().map(entity -> new FlightCarriersDto(
+                entity.getId(),
+                entity.getCarriedId(),
+                entity.getCarrierName(),
+                entity.getPrice(),
+                entity.getOutboundDate(),
+                entity.getCarrierClass()
+        )).collect(Collectors.toList());
+    }
+
+    public List<FlightDto> mapToFlightDtoList(List<FlightReponseEntity> list) {
         return list.stream().map(entity -> new FlightDto(
-                        entity.getId(),
-                        entity.getDepartureDate(),
-                        entity.getOrigin(),
-                        entity.getDestination(),
-                        entity.getCarriers().stream().map(carrier -> new FlightCarriersDto(
-                                carrier.getId(),
-                                carrier.getCarriedId(),
-                                carrier.getCarrierName(),
-                                carrier.getPrice(),
-                                carrier.getOutboundDate(),
-                                carrier.getCarrierClass()
-                        )).collect(Collectors.toList())
-                ))
+                entity.getId(),
+                entity.getDepartureDate(),
+                entity.getOrigin(),
+                entity.getDestination(),
+                entity.getCarriers().stream().map(carrier -> new FlightCarriersDto(
+                        carrier.getId(),
+                        carrier.getCarriedId(),
+                        carrier.getCarrierName(),
+                        carrier.getPrice(),
+                        carrier.getOutboundDate(),
+                        carrier.getCarrierClass()
+                )).collect(Collectors.toList())
+        ))
                 .collect(Collectors.toList());
     }
 
-    public FlightDto mapToFlightDto(FlightReponseEntity entity){
+    public FlightDto mapToFlightDto(FlightReponseEntity entity) {
         FlightDto result = new FlightDto(
                 entity.getId(),
                 entity.getDepartureDate(),
@@ -63,13 +76,19 @@ public class FlightMapper {
 
     }
 
-    private String generateCarrierClass(){
+    private String generateCarrierClass() {
         Random generator = new Random();
         String result = "";
-        switch(generator.nextInt(3)){
-            case 0: result = ECONOMIC; break;
-            case 1: result = BUSSINESS;break;
-            case 2: result = FIRST; break;
+        switch (generator.nextInt(3)) {
+            case 0:
+                result = ECONOMIC;
+                break;
+            case 1:
+                result = BUSSINESS;
+                break;
+            case 2:
+                result = FIRST;
+                break;
         }
         return result;
     }
@@ -86,16 +105,26 @@ public class FlightMapper {
                 skyscannerFlightReponseDto.getPlaces().get(0).getName()
         );
 
-        List<FlightCarriersEntity> carriers = skyscannerFlightReponseDto.getCarriers().stream()
-                .map(carrier ->
-                        new FlightCarriersEntity(
-                        carrier.getCarriedId(),
-                        carrier.getCarrierName(),
-                        price.add(BigDecimal.valueOf(generator.nextInt(11))),
-                        date.plusHours(generator.nextInt(24)).plusMinutes(generator.nextInt(60)),
-                        generateCarrierClass(), // NO RISING PRICE FOR CLASS FOR NOW
-                        reponseEntity
-                )).collect(Collectors.toList());
+        List<FlightCarriersEntity> carriers = new ArrayList<>();
+        for (SkyscannerFlightCarriersDto carrier : skyscannerFlightReponseDto.getCarriers()) {
+            String carrierClass = generateCarrierClass();
+            BigDecimal additionalPrice = new BigDecimal(0);
+            if (carrierClass.equals(ECONOMIC))
+                additionalPrice = BigDecimal.valueOf(generator.nextInt(11));
+            else if (carrierClass.equals(BUSSINESS))
+                additionalPrice = BigDecimal.valueOf(generator.nextInt(20) + 10);
+            else if (carrierClass.equals(FIRST))
+                additionalPrice = BigDecimal.valueOf(generator.nextInt(30) + 20);
+
+            FlightCarriersEntity carrierEntity = new FlightCarriersEntity(
+                    carrier.getCarriedId(),
+                    carrier.getCarrierName(),
+                    price.add(additionalPrice),
+                    date.plusHours(generator.nextInt(24)).plusMinutes(generator.nextInt(60)),
+                    generateCarrierClass(),
+                    reponseEntity);
+            carriers.add(carrierEntity);
+        }
 
         reponseEntity.setCarriers(carriers);
 
