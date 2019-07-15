@@ -41,7 +41,7 @@ public class HotelMapper {
         return hotelResponseResult;
     }
 
-    public List<HotelListDto> mapToHotelSetDtoList(List<HotelListEntity> list) {
+    public List<HotelListDto> mapToHotelListDto(List<HotelListEntity> list) {
         return list.stream()
                 .map(hotelset -> new HotelListDto(
                         hotelset.getId(),
@@ -54,7 +54,8 @@ public class HotelMapper {
                         hotelset.getCity(),
                         hotelset.getCountry(),
                         hotelset.getDisplayaddress(),
-                        hotelset.getThumburl()
+                        hotelset.getThumburl(),
+                        hotelset.getHotelEntity().getSearchId()
                 )).collect(Collectors.toList());
     }
 
@@ -65,6 +66,7 @@ public class HotelMapper {
                 hotelEntity.getDestinationLocation(),
                 hotelEntity.getShareURL()
         );
+
         List<HotelListDto> hotelListDto = hotelEntity.getHotels().stream()
                 .map(hotelset -> new HotelListDto(
                         hotelset.getId(),
@@ -77,7 +79,8 @@ public class HotelMapper {
                         hotelset.getCity(),
                         hotelset.getCountry(),
                         hotelset.getDisplayaddress(),
-                        hotelset.getThumburl()
+                        hotelset.getThumburl(),
+                        hotelset.getHotelEntity().getSearchId()
                 )).collect(Collectors.toList());
         hotelDto.setHotels(hotelListDto);
         return hotelDto;

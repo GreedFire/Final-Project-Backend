@@ -69,7 +69,8 @@ public class KayakClient {
 
     //==================================================================================================================
 
-    public HotelDto getHotels(int rooms, String location, String checkin, String checkout, int adults) {
+    public String getHotels(int rooms, String location, String checkin, String checkout, int adults) {
+        String searchId = null;
         try {
             int citycode = getHotelLocationId(location);
 
@@ -78,15 +79,17 @@ public class KayakClient {
                     prepareUrlForHotels(rooms, citycode, checkin, checkout, adults),
                     HttpMethod.GET, prepareHeaders(), HotelDto.class);
 
+
             if (response.getBody() != null) {
+                searchId = response.getBody().getSearchId();
                 LOGGER.info("Saving hotels to database: ");
                 database.saveHotel(mapper.mapToHotelEntity(response.getBody()));
             }
 
-            return Optional.ofNullable(response.getBody()).orElse(new HotelDto());
+            return searchId;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return new HotelDto();
+            return null;
         }
     }
 

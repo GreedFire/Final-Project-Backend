@@ -13,4 +13,6 @@ public interface HotelRepo extends CrudRepository<HotelEntity, String> {
     HotelEntity save(HotelEntity entity);
 
 
+
+
 }

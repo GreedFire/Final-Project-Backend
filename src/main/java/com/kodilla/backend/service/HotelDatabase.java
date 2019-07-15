@@ -45,4 +45,13 @@ public class HotelDatabase {
     public List<HotelLocationEntity> getHotelLocationByLocationName(String location) {
         return hotelLocationRepo.findByWritedCity(location);
     }
+
+    public List<HotelListEntity> getFilteredHotels(String responseId, Double rating, int stars,
+                                                   int priceMore , int priceLess){
+        return hotelListRepo.retrieveFilteredHotels(responseId, rating, stars, priceMore, priceLess);
+    }
+
+    public List<HotelListEntity> getHotelsBySearchId(String searchId){
+        return hotelListRepo.findByHotelEntity_SearchId(searchId);
+    }
 }

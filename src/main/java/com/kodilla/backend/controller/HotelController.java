@@ -28,17 +28,24 @@ public class HotelController {
     @GetMapping("/hotels")
     public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                         @RequestParam String checkin, @RequestParam String checkout,
-                                        @RequestParam int adults){
-        return kayakClient.getHotels(rooms, location, checkin, checkout, adults).getHotels();
+                                        @RequestParam int adults) {
+        return mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms,location,checkin,checkout,adults)));
     }
 
+    @GetMapping("/hotels/filter")
+    public List<HotelListDto> getHotels(@RequestParam String responseId, @RequestParam Double rating, @RequestParam int stars,
+                                        @RequestParam int priceMore, @RequestParam int priceLess) {
+        return mapper.mapToHotelListDto(database.getFilteredHotels(responseId, rating, stars, priceMore, priceLess));
+    }
+
+
     @GetMapping("/hotels/history")
-    public List<HotelListDto> getHotelSearchHistory(){
-        return mapper.mapToHotelSetDtoList(database.getSearchHistory());
+    public List<HotelListDto> getHotelSearchHistory() {
+        return mapper.mapToHotelListDto(database.getSearchHistory());
     }
 
     @GetMapping("/hotels/locations")
-    public int getLocations(@RequestParam String location){
+    public int getLocations(@RequestParam String location) {
         return kayakClient.getHotelLocationId(location);
     }
 

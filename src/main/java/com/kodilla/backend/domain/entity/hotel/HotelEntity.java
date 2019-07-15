@@ -23,7 +23,7 @@ public class HotelEntity {
 
     private String shareURL;
 
-    @OneToMany(targetEntity = HotelListEntity.class, mappedBy = "hotelResponse", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = HotelListEntity.class, mappedBy = "hotelEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<HotelListEntity> hotels;
 
     public HotelEntity(String searchId, String currency, String destinationLocation, String shareURL) {

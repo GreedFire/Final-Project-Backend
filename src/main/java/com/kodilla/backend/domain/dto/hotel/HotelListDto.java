@@ -44,4 +44,6 @@ public class HotelListDto {
 
     @JsonProperty("thumburl")
     private String thumburl;
+
+    private String HotelResponseId;
 }

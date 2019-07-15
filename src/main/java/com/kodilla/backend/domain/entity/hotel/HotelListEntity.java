@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NamedNativeQuery(
+        name = "HotelListEntity.retrieveFilteredHotels",
+        query = "SELECT * FROM HOTELS WHERE HOTEL_ENTITY_ID = :RESPONSEID AND USER_RATING >= :RATING AND STARS >= :STARS AND PRICE BETWEEN :PRICEMORE AND :PRICELESS",
+        resultClass = HotelListEntity.class
+)
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,8 +44,8 @@ public class HotelListEntity {
     private String thumburl;
 
     @ManyToOne
-    @JoinColumn(name = "HotelResponse_ID")
-    private HotelEntity hotelResponse;
+    @JoinColumn(name = "Hotel_Entity_ID")
+    private HotelEntity hotelEntity;
 
     public HotelListEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl) {
         this.id = id;
