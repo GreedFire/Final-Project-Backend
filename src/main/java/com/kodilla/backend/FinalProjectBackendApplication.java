@@ -11,11 +11,12 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - fix flight History, change it to List of objects
 	// - do filters on flightView
 	// - do user register and login
 	// - do booking
-	// - MAYBE do search dropdown menu
+	// - MAYBE DO SEARCH DROPDOWN MENU
 	// - MAYBE GENERATE PRICE RISE DEPENDING ON CARRIER CLASS
+	// - MAYBE FIX FLIGHT HISTORY, CHANGE IT TO LIST OF OBJECTS
+	// - MAYBE FIX ALL HISTORY SEARCH - ADD DATE ADDED TO ENTITIES AND SEARCH BY THAT
 
 }
