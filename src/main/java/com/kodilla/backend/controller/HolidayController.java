@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,18 +40,14 @@ public class HolidayController {
     @Autowired
     private FlightMapper flightMapper;
 
-
-
     @GetMapping("/holiday")
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
                                  @RequestParam String destinationPlace, @RequestParam String checkin,
                                  @RequestParam String checkout, @RequestParam int adults) {
-
         List<HotelListDto> hotels = hotelMapper.mapToHotelListDto(hotelDatabase.getHotelsBySearchId(kayakClient.getHotels(rooms, destinationPlace, checkin, checkout, adults)));
-        FlightDto tripFlights = flightMapper.mapToFlightDto((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, checkin)).get()));
-        FlightDto returnFlight = flightMapper.mapToFlightDto((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(destinationPlace, originPlace, checkout)).get()));
-
-        return new HolidayDto(hotels, tripFlights, returnFlight);
+        List<FlightDto> tripFlights = flightMapper.mapToFlightDtoList((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, checkin)).get()));
+        List<FlightDto> returnFlights = flightMapper.mapToFlightDtoList((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(destinationPlace, originPlace, checkout)).get()));
+        return new HolidayDto(hotels, tripFlights, returnFlights);
     }
 
 

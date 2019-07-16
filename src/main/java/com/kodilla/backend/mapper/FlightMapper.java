@@ -53,6 +53,12 @@ public class FlightMapper {
                 .collect(Collectors.toList());
     }
 
+    public List<FlightDto> mapToFlightDtoList(FlightReponseEntity entity) {
+        List<FlightDto> result = new ArrayList<>();
+        result.add(mapToFlightDto(entity));
+        return result;
+    }
+
     public FlightDto mapToFlightDto(FlightReponseEntity entity) {
         FlightDto result = new FlightDto(
                 entity.getId(),

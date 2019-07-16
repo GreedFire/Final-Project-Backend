@@ -26,10 +26,10 @@ public class FlightController {
     private FlightMapper mapper;
 
     @GetMapping("/flights")
-    public FlightDto getFlights(@RequestParam String originPlace,
+    public List<FlightDto> getFlights(@RequestParam String originPlace,
                                               @RequestParam String destinationPlace,
                                               @RequestParam String outboundPartialDate){
-        return mapper.mapToFlightDto((database.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate)).get()));
+        return mapper.mapToFlightDtoList((database.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, outboundPartialDate)).get()));
     }
 
     @GetMapping("/flights/locations")
