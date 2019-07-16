@@ -5,7 +5,9 @@ import com.kodilla.backend.client.skyscanner.SkyscannerClient;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.holiday.HolidayDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.mapper.HotelMapper;
+import com.kodilla.backend.service.FlightDatabase;
 import com.kodilla.backend.service.HotelDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,24 +28,30 @@ public class HolidayController {
     private SkyscannerClient skyscannerClient;
 
     @Autowired
-    private HotelMapper mapper;
+    private HotelMapper hotelMapper;
 
     @Autowired
-    private HotelDatabase database;
+    private HotelDatabase hotelDatabase;
 
-    /*
+    @Autowired
+    private FlightDatabase flightDatabase;
+
+    @Autowired
+    private FlightMapper flightMapper;
+
+
 
     @GetMapping("/holiday")
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
                                  @RequestParam String destinationPlace, @RequestParam String checkin,
                                  @RequestParam String checkout, @RequestParam int adults) {
 
-        List<HotelListDto> hotels = mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms, destinationPlace, checkin, checkout, adults)));
-        FlightDto tripFlights = skyscannerClient.getFlights(originPlace, destinationPlace, checkin);
-        FlightDto returnFlight = skyscannerClient.getFlights(destinationPlace, originPlace, checkout);
+        List<HotelListDto> hotels = hotelMapper.mapToHotelListDto(hotelDatabase.getHotelsBySearchId(kayakClient.getHotels(rooms, destinationPlace, checkin, checkout, adults)));
+        FlightDto tripFlights = flightMapper.mapToFlightDto((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(originPlace, destinationPlace, checkin)).get()));
+        FlightDto returnFlight = flightMapper.mapToFlightDto((flightDatabase.getFlightResponseById(skyscannerClient.getFlights(destinationPlace, originPlace, checkout)).get()));
 
         return new HolidayDto(hotels, tripFlights, returnFlight);
     }
 
-     */
+
 }
