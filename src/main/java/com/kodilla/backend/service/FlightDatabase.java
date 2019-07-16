@@ -8,6 +8,7 @@ import com.kodilla.backend.repository.flight.FlightLocationRepo;
 import com.kodilla.backend.repository.flight.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -57,5 +58,9 @@ public class FlightDatabase {
 
     public Optional<FlightReponseEntity> getFlightResponseById(long id){
         return flightResponseRepo.findById(id);
+    }
+
+    public List<FlightCarriersEntity> getFilteredFlights(long responseId, String planeClass, int priceMoreThan, int priceLessThan){
+        return flightCarriersRepo.retrieveFilteredFlights(responseId, planeClass, priceMoreThan, priceLessThan);
     }
 }

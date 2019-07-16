@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class FlightMapper {
 
-    private final String BUSSINESS = "bussines";
+    private final String BUSINESS = "business";
     private final String ECONOMIC = "economic";
     private final String FIRST = "first";
 
@@ -90,7 +90,7 @@ public class FlightMapper {
                 result = ECONOMIC;
                 break;
             case 1:
-                result = BUSSINESS;
+                result = BUSINESS;
                 break;
             case 2:
                 result = FIRST;
@@ -117,7 +117,7 @@ public class FlightMapper {
             BigDecimal additionalPrice = new BigDecimal(0);
             if (carrierClass.equals(ECONOMIC))
                 additionalPrice = BigDecimal.valueOf(generator.nextInt(11));
-            else if (carrierClass.equals(BUSSINESS))
+            else if (carrierClass.equals(BUSINESS))
                 additionalPrice = BigDecimal.valueOf(generator.nextInt(20) + 10);
             else if (carrierClass.equals(FIRST))
                 additionalPrice = BigDecimal.valueOf(generator.nextInt(30) + 20);

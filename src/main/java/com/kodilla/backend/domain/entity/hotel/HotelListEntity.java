@@ -46,18 +46,4 @@ public class HotelListEntity {
     @ManyToOne
     @JoinColumn(name = "Hotel_Entity_ID")
     private HotelEntity hotelEntity;
-
-    public HotelListEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl) {
-        this.id = id;
-        this.userRating = userRating;
-        this.price = price;
-        this.stars = stars;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.city = city;
-        this.country = country;
-        this.displayaddress = displayaddress;
-        this.thumburl = thumburl;
-    }
 }

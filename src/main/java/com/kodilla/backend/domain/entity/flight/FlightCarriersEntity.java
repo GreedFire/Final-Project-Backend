@@ -8,6 +8,12 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@NamedNativeQuery(
+        name = "FlightCarriersEntity.retrieveFilteredFlights",
+        query = "SELECT * FROM FLIGHTS_CARRIERS WHERE FLIGHT_RESPONSE_ID = :RESPONSEID AND CARRIER_CLASS = :PLANECLASS AND PRICE BETWEEN :PRICEMORE AND :PRICELESS",
+        resultClass = FlightCarriersEntity.class
+)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
