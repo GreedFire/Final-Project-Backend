@@ -3,7 +3,7 @@ package com.kodilla.backend.controller;
 import com.kodilla.backend.client.kayak.KayakClient;
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.dto.holiday.HolidayDto;
+import com.kodilla.backend.domain.dto.HolidayDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.mapper.HotelMapper;

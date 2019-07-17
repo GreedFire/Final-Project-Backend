@@ -29,7 +29,7 @@ public class HotelController {
     public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                         @RequestParam String checkin, @RequestParam String checkout,
                                         @RequestParam int adults) {
-        return mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms,location,checkin,checkout,adults)));
+        return mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms, location, checkin, checkout, adults)));
     }
 
     @GetMapping("/hotels/filter")

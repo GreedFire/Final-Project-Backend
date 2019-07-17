@@ -1,4 +1,4 @@
-package com.kodilla.backend.domain.dto.holiday;
+package com.kodilla.backend.domain.dto;
 
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
