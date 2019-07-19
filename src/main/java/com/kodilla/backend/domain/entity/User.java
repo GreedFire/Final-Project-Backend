@@ -23,6 +23,24 @@ import java.time.LocalDate;
                 resultClass = User.class
         ),
 
+        @NamedNativeQuery(
+                name = "User.updatePassword",
+                query = "UPDATE USERS SET PASSWORD = :NEWPASSWORD WHERE ID = :ID",
+                resultClass = User.class
+        ),
+
+        @NamedNativeQuery(
+                name = "User.deleteUser",
+                query = "DELETE USERS WHERE ID = :ID AND PASSWORD = :PASSWORD ",
+                resultClass = User.class
+        ),
+
+        @NamedNativeQuery(
+                name = "User.checkOldPassword",
+                query = "SELECT * FROM USERS WHERE ID = :ID AND PASSWORD = :OLDPASSWORD",
+                resultClass = User.class
+        ),
+
 })
 
 @Data

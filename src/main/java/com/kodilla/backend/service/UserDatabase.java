@@ -4,6 +4,7 @@ import com.kodilla.backend.domain.entity.User;
 import com.kodilla.backend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class UserDatabase {
         return userResult.isPresent();
     }
 
-    public Optional<User> getId(String username, String password){
+    public Optional<User> getUserId(String username, String password){
         return userRepo.findByUsernameAndPassword(username, password);
     }
 
@@ -33,4 +34,21 @@ public class UserDatabase {
     public void signOut(long id){
         userRepo.signOut(id);
     }
+
+    public Optional<User> findById(long id){
+        return userRepo.findById(id);
+    }
+
+    public void updatePassword(long id, String newPassword){
+        userRepo.updatePassword(id, newPassword);
+    }
+
+    public Optional<User> checkOldPassword(long id, String oldPassword){
+        return userRepo.checkOldPassword(id, oldPassword);
+    }
+
+    public void deleteUser(long id, String password){
+        userRepo.deleteUser(id, password);
+    }
+
 }

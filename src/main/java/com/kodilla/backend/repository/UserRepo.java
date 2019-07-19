@@ -14,6 +14,8 @@ public interface UserRepo extends CrudRepository<User, Long> {
 
     User save(User user);
 
+    Optional<User> findById(long id);
+
     Optional<User> findByUsername(String username);
 
     Optional<User> findByUsernameAndPassword(String username, String password);
@@ -25,6 +27,19 @@ public interface UserRepo extends CrudRepository<User, Long> {
     @Modifying
     @Query(nativeQuery = true)
     void signOut(@Param("ID") long id);
+
+    @Modifying
+    @Query(nativeQuery = true)
+    void updatePassword(@Param("ID") long id, @Param("NEWPASSWORD") String newPassword);
+
+    @Modifying
+    @Query(nativeQuery = true)
+    void deleteUser(@Param("ID") long id, @Param("PASSWORD") String newPassword);
+
+    @Query(nativeQuery = true)
+    Optional<User> checkOldPassword(@Param("ID") long id, @Param("OLDPASSWORD") String oldPassword);
+
+
 
 
 }

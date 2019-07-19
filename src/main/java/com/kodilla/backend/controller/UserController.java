@@ -1,6 +1,5 @@
 package com.kodilla.backend.controller;
 
-import com.kodilla.backend.domain.UserIdDto;
 import com.kodilla.backend.domain.dto.UserDto;
 import com.kodilla.backend.domain.entity.User;
 import com.kodilla.backend.mapper.UserMapper;
@@ -33,13 +32,23 @@ public class UserController {
     }
 
     @GetMapping("/users/getId")
-    public UserIdDto getId(@RequestParam String username, @RequestParam String password) {
-            UserIdDto userIdDto = new UserIdDto();
-            Optional<User> user = database.getId(username, password);
+    public Long getId(@RequestParam String username, @RequestParam String password) {
+            Long id = null;
+            Optional<User> user = database.getUserId(username, password);
             if(user.isPresent()){
-               userIdDto.setId(user.get().getId());
+               id = user.get().getId();
             }
-            return userIdDto;
+            return id;
+    }
+
+    @GetMapping("/users/loggedIn")
+    public Boolean checkIfLoggedIn(@RequestParam long id){
+        boolean result = false;
+        Optional<User> user = database.findById(id);
+        if(user.isPresent()){
+            result = user.get().isSignedIn();
+        }
+        return result;
     }
 
     @PutMapping("/users/signIn")
@@ -49,5 +58,27 @@ public class UserController {
 
     @PutMapping("/users/signOut")
     public void signOut(@RequestParam long userId){database.signOut(userId);}
+
+    @PutMapping("/users/passwordChange")
+    public Boolean changePassword(@RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword){
+        boolean result = false;
+        Optional<User> user = database.checkOldPassword(id, oldPassword);
+        if(user.isPresent()){
+            database.updatePassword(id, newPassword);
+            result = true;
+        }
+        return result;
+    }
+
+    @DeleteMapping("users/delete")
+    public Boolean deleteAccount(@RequestParam long id, @RequestParam String password){
+        boolean result = false;
+        Optional<User> user = database.checkOldPassword(id, password);
+        if(user.isPresent()){
+            database.deleteUser(id, password);
+            result = true;
+        }
+        return result;
+    }
 
 }
