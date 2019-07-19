@@ -13,14 +13,24 @@ public class UserDatabase {
     @Autowired
     private UserRepo userRepo;
 
-    public User createUser(User user) {
-        return userRepo.save(user);
+    public void createUser(User user) {
+        userRepo.save(user);
     }
 
     public boolean isUserExist(User user) {
         Optional<User> userResult = userRepo.findByUsername(user.getUsername());
         return userResult.isPresent();
+    }
 
+    public Optional<User> getId(String username, String password){
+        return userRepo.findByUsernameAndPassword(username, password);
+    }
 
+    public void signIn(long id){
+        userRepo.signIn(id);
+    }
+
+    public void signOut(long id){
+        userRepo.signOut(id);
     }
 }

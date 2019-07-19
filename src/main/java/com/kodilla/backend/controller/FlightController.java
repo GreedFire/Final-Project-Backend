@@ -1,5 +1,6 @@
 package com.kodilla.backend.controller;
 
+import com.kodilla.backend.domain.UserIdDto;
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;

@@ -7,6 +7,24 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
+
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "User.signIn",
+                query = "UPDATE USERS SET SIGNED_IN = 'TRUE'  WHERE ID = :ID",
+                resultClass = User.class
+        ),
+
+        @NamedNativeQuery(
+                name = "User.signOut",
+                query = "UPDATE USERS SET SIGNED_IN = 'FALSE'  WHERE ID = :ID",
+                resultClass = User.class
+        ),
+
+})
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
