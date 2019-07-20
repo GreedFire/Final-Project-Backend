@@ -8,7 +8,6 @@ import com.kodilla.backend.repository.flight.FlightLocationRepo;
 import com.kodilla.backend.repository.flight.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +25,7 @@ public class FlightDatabase {
     @Autowired
     private FlightCarriersRepo flightCarriersRepo;
 
-    public FlightReponseEntity saveFlightResponse(FlightReponseEntity entity){
+    public FlightReponseEntity saveFlightResponse(FlightReponseEntity entity) {
         return flightResponseRepo.save(entity);
     }
 
@@ -44,23 +43,23 @@ public class FlightDatabase {
         return flightLocationRepo.findByWritedLocation(writedLocation);
     }
 
-    public List<FlightReponseEntity> getFlightsByDepartureDateAndOriginAndDestination(LocalDateTime departureDate, String origin, String destination){
+    public List<FlightReponseEntity> getFlightsByDepartureDateAndOriginAndDestination(LocalDateTime departureDate, String origin, String destination) {
         return flightResponseRepo.findByDepartureDateAndOriginAndDestination(departureDate, origin, destination);
     }
 
-    public List<FlightReponseEntity> getSearchHistory(){
+    public List<FlightReponseEntity> getSearchHistory() {
         return flightResponseRepo.findAll();
     }
 
-    public List<FlightCarriersEntity> getFlightsCariers(long flightResponseId){
+    public List<FlightCarriersEntity> getFlightsCariers(long flightResponseId) {
         return flightCarriersRepo.findByFlightReponseEntity_Id(flightResponseId);
     }
 
-    public Optional<FlightReponseEntity> getFlightResponseById(long id){
+    public Optional<FlightReponseEntity> getFlightResponseById(long id) {
         return flightResponseRepo.findById(id);
     }
 
-    public List<FlightCarriersEntity> getFilteredFlights(long responseId, String planeClass, int priceMoreThan, int priceLessThan){
+    public List<FlightCarriersEntity> getFilteredFlights(long responseId, String planeClass, int priceMoreThan, int priceLessThan) {
         return flightCarriersRepo.retrieveFilteredFlights(responseId, planeClass, priceMoreThan, priceLessThan);
     }
 }

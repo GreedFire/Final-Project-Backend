@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,23 +31,38 @@ public class HotelController {
     public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                         @RequestParam String checkin, @RequestParam String checkout,
                                         @RequestParam int adults) {
-        return mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms, location, checkin, checkout, adults)));
+        List<HotelListDto> result = new ArrayList<>();
+        LocalDate checkInDate = LocalDate.parse(checkin);
+        LocalDate checkOutDate = LocalDate.parse(checkin);
+        if (!checkInDate.isBefore(LocalDate.now()) || !checkOutDate.isBefore(LocalDate.now())) {
+            result = mapper.mapToHotelListDto(database.getHotelsBySearchId(kayakClient.getHotels(rooms, location, checkin, checkout, adults)));
+            if (result == null || result.isEmpty())
+                result = new ArrayList<>();
+        }
+
+        return result;
     }
 
     @GetMapping("/hotels/filter")
     public List<HotelListDto> getHotels(@RequestParam String responseId, @RequestParam Double rating, @RequestParam int stars,
                                         @RequestParam int priceMore, @RequestParam int priceLess) {
-        return mapper.mapToHotelListDto(database.getFilteredHotels(responseId, rating, stars, priceMore, priceLess));
+        List<HotelListDto> result = mapper.mapToHotelListDto(database.getFilteredHotels(responseId, rating, stars, priceMore, priceLess));
+        if (result == null || result.isEmpty())
+            result = new ArrayList<>();
+        return result;
     }
 
 
     @GetMapping("/hotels/history")
     public List<HotelListDto> getHotelSearchHistory() {
-        return mapper.mapToHotelListDto(database.getSearchHistory());
+        List<HotelListDto> result = mapper.mapToHotelListDto(database.getSearchHistory());
+        if (result == null || result.isEmpty())
+            result = new ArrayList<>();
+        return result;
     }
 
     @GetMapping("/hotels/locations")
-    public int getLocations(@RequestParam String location) {
+    public Integer getLocations(@RequestParam String location) {
         return kayakClient.getHotelLocationId(location);
     }
 

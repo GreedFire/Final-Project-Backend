@@ -72,28 +72,28 @@ public class KayakClient {
         String searchId = "";
         try {
             int citycode = getHotelLocationId(location);
+            if(citycode != -1){
+                LOGGER.info("Getting hotels from Kayak API");
+                ResponseEntity<HotelDto> response = restTemplate.exchange(
+                        prepareUrlForHotels(rooms, citycode, checkin, checkout, adults),
+                        HttpMethod.GET, prepareHeaders(), HotelDto.class);
 
-            LOGGER.info("Getting hotels from Kayak API");
-            ResponseEntity<HotelDto> response = restTemplate.exchange(
-                    prepareUrlForHotels(rooms, citycode, checkin, checkout, adults),
-                    HttpMethod.GET, prepareHeaders(), HotelDto.class);
-
-
-            if (response.getBody() != null) {
-                searchId = response.getBody().getSearchId();
-                LOGGER.info("Saving hotels to database");
-                database.saveHotel(mapper.mapToHotelEntity(response.getBody()));
+                if (response.getBody() != null) {
+                    searchId = response.getBody().getSearchId();
+                    LOGGER.info("Saving hotels to database");
+                    database.saveHotel(mapper.mapToHotelEntity(response.getBody()));
+                }
             }
-
-            return searchId;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
             return "";
         }
+
+        return searchId;
     }
 
     public int getHotelLocationId(String location) {
-        int cityCode = 0;
+        int cityCode = -1;
         try {
             LOGGER.info("Trying to find hotel location from database");
             if (database.getHotelLocationByLocationName(location).size() > 0) {
@@ -105,7 +105,7 @@ public class KayakClient {
                         prepareUrlForHotelsLocation(location), HttpMethod.GET, prepareHeaders(), new ParameterizedTypeReference<List<HotelLocationDto>>() {
                         });
 
-                if (response.getBody() != null) {
+                if (response.getBody() != null && !response.getBody().isEmpty()) {
                     LOGGER.info("Saving hotels locations from Kayak API to database");
                     List<HotelLocationEntity> locationEntities = mapper.mapToHotelLocationEntityList(response.getBody(), location);
                     for (HotelLocationEntity entity : locationEntities) {
@@ -117,7 +117,7 @@ public class KayakClient {
             return cityCode;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return 0;
+            return -1;
         }
     }
 }

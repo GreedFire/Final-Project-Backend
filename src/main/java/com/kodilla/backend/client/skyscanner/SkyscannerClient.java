@@ -1,6 +1,5 @@
 package com.kodilla.backend.client.skyscanner;
 
-import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationResponseDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
@@ -20,9 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class SkyscannerClient {
@@ -68,37 +65,34 @@ public class SkyscannerClient {
     //==================================================================================================================
 
     public long getFlights(String originPlace, String destinationPlace, String outboundPartialDate) {
-        String originLocation;
-        String destinationLocation;
-        FlightReponseEntity entity;
-        long result = 0;
+        long result = -1;
         try {
-            originLocation = getFlightLocationCode(originPlace);
-            destinationLocation = getFlightLocationCode(destinationPlace);
+            String originLocation = getFlightLocationCode(originPlace);
+            String destinationLocation = getFlightLocationCode(destinationPlace);
 
             LOGGER.info("Getting information about skyscanner from Skyscanner API");
             ResponseEntity<SkyscannerFlightReponseDto> response = restTemplate.exchange(
                     prepareUrlForFlights(originLocation, destinationLocation, outboundPartialDate),
                     HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
 
-            if(response.getBody() != null) {
-                entity = mapper.mapToReponseEntity(response.getBody());
+            if (response.getBody() != null) {
+                FlightReponseEntity entity = mapper.mapToReponseEntity(response.getBody());
                 LOGGER.info("Saving flights to database");
-                if(database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).size() == 0){
+                if (database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).size() == 0) {
                     database.saveFlightResponse(entity);
                     result = entity.getId();
-                }
-                else result = database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).get(0).getId();
+                } else
+                    result = database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).get(0).getId();
             }
             return result;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return 0;
+            return -1;
         }
     }
 
     public String getFlightLocationCode(String location) {
-        String locationCode = null;
+        String locationCode = "";
         try {
             LOGGER.info("Trying to find flight location from database");
             if (database.getFlightLocationByWritedLocation(location).size() > 0) {
@@ -116,14 +110,13 @@ public class SkyscannerClient {
                     for (FlightLocationEntity entity : locationEntities) {
                         database.saveFlightLocations(entity);
                     }
-
                     locationCode = response.getBody().getPlaces().get(0).getPlaceId();
                 }
             }
             return locationCode;
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return "";
         }
     }
 
