@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class FlightReponseEntity {
 
     private String destination;
 
+    private LocalDate searchDate;
+
     @OneToMany(targetEntity = FlightCarriersEntity.class, mappedBy = "flightReponseEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FlightCarriersEntity> carriers;
 
@@ -33,5 +36,6 @@ public class FlightReponseEntity {
         this.departureDate = departureDate;
         this.origin = origin;
         this.destination = destination;
+        this.searchDate = LocalDate.now();
     }
 }

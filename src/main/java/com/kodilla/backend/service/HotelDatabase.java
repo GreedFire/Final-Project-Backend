@@ -9,6 +9,7 @@ import com.kodilla.backend.repository.hotel.HotelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class HotelDatabase {
     }
 
     public List<HotelListEntity> getSearchHistory() {
-        return hotelListRepo.findAll();
+        return hotelListRepo.findAllBySearchDateAfter(LocalDate.now().minusDays(1));
     }
 
     public void saveHotelLocations(HotelLocationEntity location) {

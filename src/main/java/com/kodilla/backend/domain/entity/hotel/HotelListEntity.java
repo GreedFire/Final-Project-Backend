@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NamedNativeQuery(
         name = "HotelListEntity.retrieveFilteredHotels",
@@ -43,7 +44,25 @@ public class HotelListEntity {
 
     private String thumburl;
 
+    private LocalDate searchDate;
+
     @ManyToOne
     @JoinColumn(name = "Hotel_Entity_ID")
     private HotelEntity hotelEntity;
+
+    public HotelListEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl, HotelEntity hotelEntity) {
+        this.id = id;
+        this.userRating = userRating;
+        this.price = price;
+        this.stars = stars;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.displayaddress = displayaddress;
+        this.thumburl = thumburl;
+        this.searchDate =  LocalDate.now();
+        this.hotelEntity = hotelEntity;
+    }
 }

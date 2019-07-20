@@ -9,6 +9,7 @@ import com.kodilla.backend.repository.flight.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class FlightDatabase {
     }
 
     public List<FlightReponseEntity> getSearchHistory() {
-        return flightResponseRepo.findAll();
+        return flightResponseRepo.findAllBySearchDateAfter(LocalDate.now().minusDays(1));
     }
 
     public List<FlightCarriersEntity> getFlightsCariers(long flightResponseId) {

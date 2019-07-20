@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional
@@ -15,7 +16,9 @@ public interface HotelListRepo extends CrudRepository<HotelListEntity, String> {
 
     HotelListEntity save(HotelListEntity entity);
 
-    List<HotelListEntity> findAll();
+
+
+    List<HotelListEntity> findAllBySearchDateAfter(LocalDate date);
 
     @Query(nativeQuery = true)
     List<HotelListEntity> retrieveFilteredHotels(@Param("RESPONSEID") String responseId, @Param("RATING") double rating,
