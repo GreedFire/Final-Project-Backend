@@ -4,7 +4,6 @@ import com.kodilla.backend.domain.entity.User;
 import com.kodilla.backend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -35,7 +34,7 @@ public class UserDatabase {
         userRepo.signOut(id);
     }
 
-    public Optional<User> findById(long id){
+    public Optional<User> getById(long id){
         return userRepo.findById(id);
     }
 

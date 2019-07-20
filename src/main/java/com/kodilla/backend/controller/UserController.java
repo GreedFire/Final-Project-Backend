@@ -22,9 +22,10 @@ public class UserController {
     private UserDatabase database;
 
     @PostMapping(path = "/users", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public Boolean createUser(@RequestBody UserDto user) {
-        if (!database.isUserExist(mapper.mapToUser(user))) {
-            database.createUser(mapper.mapToUser(user));
+    public Boolean createUser(@RequestBody UserDto userDto) {
+        User user = mapper.mapToUser(userDto);
+        if (!database.isUserExist(user)) {
+            database.createUser(user);
             return true;
         } else {
             return false;
@@ -44,7 +45,7 @@ public class UserController {
     @GetMapping("/users/loggedIn")
     public Boolean checkIfLoggedIn(@RequestParam long id){
         boolean result = false;
-        Optional<User> user = database.findById(id);
+        Optional<User> user = database.getById(id);
         if(user.isPresent()){
             result = user.get().isSignedIn();
         }
@@ -60,25 +61,31 @@ public class UserController {
     public void signOut(@RequestParam long userId){database.signOut(userId);}
 
     @PutMapping("/users/passwordChange")
-    public Boolean changePassword(@RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword){
-        boolean result = false;
+    public void changePassword(@RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword){
         Optional<User> user = database.checkOldPassword(id, oldPassword);
         if(user.isPresent()){
             database.updatePassword(id, newPassword);
+        }
+    }
+
+    @GetMapping("/users/checkNewPassword")
+    public Boolean isNewPasswordOk(@RequestParam long id, @RequestParam String newPassword){
+        boolean result = false;
+        Optional<User> user = database.getById(id);
+        if(user.isPresent() && user.get().getPassword().equals(newPassword)){
             result = true;
         }
         return result;
     }
 
     @DeleteMapping("users/delete")
-    public Boolean deleteAccount(@RequestParam long id, @RequestParam String password){
-        boolean result = false;
+    public void deleteAccount(@RequestParam long id, @RequestParam String password){
         Optional<User> user = database.checkOldPassword(id, password);
         if(user.isPresent()){
             database.deleteUser(id, password);
-            result = true;
         }
-        return result;
     }
+
+
 
 }
