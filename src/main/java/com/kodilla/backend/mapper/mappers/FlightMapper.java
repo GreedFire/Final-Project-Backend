@@ -1,4 +1,4 @@
-package com.kodilla.backend.mapper;
+package com.kodilla.backend.mapper.mappers;
 
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
