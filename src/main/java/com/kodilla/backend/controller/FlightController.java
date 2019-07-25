@@ -7,10 +7,7 @@ import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.mapper.mappers.FlightMapper;
 import com.kodilla.backend.service.database.FlightDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/flights")
 public class FlightController {
 
     @Autowired
@@ -30,7 +27,7 @@ public class FlightController {
     @Autowired
     private FlightMapper mapper;
 
-    @GetMapping("/flights")
+    @GetMapping
     public List<FlightDto> getFlights(@RequestParam String originPlace,
                                       @RequestParam String destinationPlace,
                                       @RequestParam String outboundPartialDate) {
@@ -47,8 +44,8 @@ public class FlightController {
         return result;
     }
 
-    @GetMapping("/flights/filter")
-    public List<FlightDto> getFlights(@RequestParam long responseId,
+    @GetMapping("filter/{responseId}/")
+    public List<FlightDto> getFlights(@PathVariable long responseId,
                                       @RequestParam String carrierClass,
                                       @RequestParam int priceMoreThan,
                                       @RequestParam int priceLessThan) {
@@ -66,12 +63,12 @@ public class FlightController {
         return resultList;
     }
 
-    @GetMapping("/flights/locations")
-    public String getFlightsLocation(@RequestParam String place) {
+    @GetMapping("/locations/{place}")
+    public String getFlightsLocation(@PathVariable String place) {
         return skyscannerClient.getFlightLocationCode(place);
     }
 
-    @GetMapping("/flights/history")
+    @GetMapping("/history")
     public List<FlightDto> getHotelSearchHistory() {
         return mapper.mapToFlightDtoList(database.getSearchHistory());
     }

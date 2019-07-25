@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/holiday")
 public class HolidayController {
 
     @Autowired
@@ -43,7 +43,7 @@ public class HolidayController {
     @Autowired
     private FlightMapper flightMapper;
 
-    @GetMapping("/holiday")
+    @GetMapping
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
                                  @RequestParam String destinationPlace, @RequestParam String checkin,
                                  @RequestParam String checkout, @RequestParam int adults) {
