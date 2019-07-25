@@ -58,8 +58,7 @@ public class SkyscannerClient {
         headers.set("X-RapidAPI-Host", skyscannerConfig.getSkyscannerHeaderHost());
         headers.set("X-RapidAPI-Key", skyscannerConfig.getSkyscannerHeaderKey());
         //Create a new HttpEntity
-        final HttpEntity<String> entity = new HttpEntity<String>(headers);
-        return entity;
+        return new HttpEntity<>(headers);
     }
 
     //==================================================================================================================
