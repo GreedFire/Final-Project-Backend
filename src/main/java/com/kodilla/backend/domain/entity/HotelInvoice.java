@@ -25,7 +25,14 @@ public class HotelInvoice {
 
     private BigDecimal price;
 
-    private HotelListEntity hotel;
+    private long hotelId;
 
-    private User user;
+    private long userId;
+
+    public HotelInvoice(LocalDate date, BigDecimal price, long hotelId, long userId) {
+        this.date = date;
+        this.price = price;
+        this.hotelId = hotelId;
+        this.userId = userId;
+    }
 }

@@ -1,33 +1,23 @@
-package com.kodilla.backend.domain.entity;
+package com.kodilla.backend.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "FLIGHT_INVOICE")
-public class FlightInvoice {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Data
+public class FlightInvoiceDto {
     private long id;
-
     private LocalDate date;
-
     private BigDecimal price;
-
     private long carrierId;
-
     private long userId;
 
-    public FlightInvoice(LocalDate date, BigDecimal price, long carrierId, long userId) {
+    public FlightInvoiceDto(LocalDate date, BigDecimal price, long carrierId, long userId) {
         this.date = date;
         this.price = price;
         this.carrierId = carrierId;
