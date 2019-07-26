@@ -1,4 +1,4 @@
-package com.kodilla.backend.service;
+package com.kodilla.backend.service.database;
 
 import com.kodilla.backend.domain.entity.User;
 import com.kodilla.backend.repository.UserRepo;

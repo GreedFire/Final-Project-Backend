@@ -5,10 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDate;
-
-
-
 
 @NamedNativeQueries({
         @NamedNativeQuery(
@@ -48,7 +46,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User extends com.kodilla.backend.domain.entity.Entity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,4 +1,4 @@
-package com.kodilla.backend.mapper;
+package com.kodilla.backend.mapper.mappers;
 
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;

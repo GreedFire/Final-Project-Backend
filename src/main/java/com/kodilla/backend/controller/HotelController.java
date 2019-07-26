@@ -2,8 +2,8 @@ package com.kodilla.backend.controller;
 
 import com.kodilla.backend.client.kayak.KayakClient;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
-import com.kodilla.backend.mapper.HotelMapper;
-import com.kodilla.backend.service.HotelDatabase;
+import com.kodilla.backend.mapper.mappers.HotelMapper;
+import com.kodilla.backend.service.database.HotelDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

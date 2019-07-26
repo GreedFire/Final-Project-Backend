@@ -2,8 +2,9 @@ package com.kodilla.backend.controller;
 
 import com.kodilla.backend.domain.dto.UserDto;
 import com.kodilla.backend.domain.entity.User;
-import com.kodilla.backend.mapper.UserMapper;
-import com.kodilla.backend.service.UserDatabase;
+import com.kodilla.backend.mapper.Mapper;
+import com.kodilla.backend.mapper.MapperFactory;
+import com.kodilla.backend.service.database.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,15 +16,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1")
 public class UserController {
 
-    @Autowired
-    private UserMapper mapper;
+    private Mapper<User, UserDto> mapper = MapperFactory.getInstance().getMapper(User.class);
 
     @Autowired
     private UserDatabase database;
 
     @PostMapping(path = "/users", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public Boolean createUser(@RequestBody UserDto userDto) {
-        User user = mapper.mapToUser(userDto);
+
+        User user = mapper.mapToEntity(userDto);
         if (!database.isUserExist(user)) {
             database.createUser(user);
             return true;

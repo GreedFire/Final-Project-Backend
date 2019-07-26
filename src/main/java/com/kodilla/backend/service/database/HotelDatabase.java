@@ -1,4 +1,4 @@
-package com.kodilla.backend.service;
+package com.kodilla.backend.service.database;
 
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
