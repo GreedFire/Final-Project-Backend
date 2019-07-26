@@ -11,14 +11,13 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - reverse singelton
-	// - search by user or not user and add it to database
-	// - do booking
-	// - FIX FRONTEND REFRESH[its done but cant hide elements) (i think problem is with navigate bar https://www.youtube.com/watch?v=-xejxaIQTO8
-	// - MAYBE DO SEARCH DROPDOWN MENU
-	// - MAYBE DO ACTIONS IN SERVICES NOT CONTROLLERS
-	// - MAYBE THROW ERRORS
-	// - PUT RESTTEMPLATE IN OTHER CLASS THAN CREATING NEW RESTTEMPALTE OBJECTS
-	// - CHANGE NAMING OF ENDPOINTS
+	// - (TO DO) do booking database save and getter endpoint to booking history on ACCount view and make scheduler
+	// - (TO DO) search by user or not user and add it to database
+	// - (TO DO) finish mapperFactory
+	// - (TO DO) MAYBE DO SEARCH DROPDOWN MENU
+	// - (TO DO) ADD RELATIONS BETWEEN HOTEL - INVOICE - USER, FLIGHT - INVOICE - USER
+	// - (FIX) probably two users will see same carrier after buying because instance is static https://vaadin.com/docs/v8/framework/advanced/advanced-global.html
+	// - (FIX H) probably after refreshing site user will be log out but in database will be log in
+	// - (FIX H) EOFException while reading PDF: Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
 
 }
