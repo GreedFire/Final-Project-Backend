@@ -2,8 +2,10 @@ package com.kodilla.backend.mapper.mappers;
 
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
 import org.springframework.stereotype.Component;
@@ -106,5 +108,11 @@ public class HotelMapper {
                         writedLocation
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public HotelLiteDto mapToHotelLiteDto(HotelEntityLite entity){
+        return new HotelLiteDto(
+                entity.getDestinationLocation()
+        );
     }
 }

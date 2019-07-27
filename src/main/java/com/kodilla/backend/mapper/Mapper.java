@@ -5,7 +5,7 @@ import com.kodilla.backend.domain.entity.Entity;
 
 import java.util.List;
 
-public interface Mapper <T extends Entity, S extends Dto > {
+public interface Mapper<T, S>{
 
     T mapToEntity(S dto);
 

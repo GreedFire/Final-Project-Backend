@@ -2,6 +2,8 @@ package com.kodilla.backend.service;
 
 import com.kodilla.backend.client.kayak.KayakClient;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
+import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.mapper.mappers.HotelMapper;
 import com.kodilla.backend.service.database.HotelDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,19 @@ public class HotelService {
 
     public Integer getLocations(String location) {
         return kayakClient.getHotelLocationId(location);
+    }
+
+    public HotelLiteDto getMostSearchedLocation(){
+        HotelEntityLite entity = database.getMostSearchedLocation();
+        if(entity != null){
+            saveMostSearchedLocation(entity);
+            return mapper.mapToHotelLiteDto(entity);
+        }
+        else return new HotelLiteDto("");
+
+    }
+
+    public void saveMostSearchedLocation(HotelEntityLite entityLite){
+        database.saveMostSearchedLocation(entityLite);
     }
 }

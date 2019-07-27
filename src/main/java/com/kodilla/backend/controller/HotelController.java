@@ -1,6 +1,7 @@
 package com.kodilla.backend.controller;
 
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,11 @@ public class HotelController {
     @GetMapping("/locations/{location}")
     public Integer getLocations(@PathVariable String location) {
         return service.getLocations(location);
+    }
+
+    @GetMapping("/location/mostInterested")
+    public HotelLiteDto getMostSearchedLocation(){
+        return service.getMostSearchedLocation();
     }
 
 }

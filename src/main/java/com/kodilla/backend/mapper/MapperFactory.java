@@ -7,7 +7,7 @@ import com.kodilla.backend.mapper.mappers.UserMapper;
 
 
 //SINGLETON + FACTORY
-public class MapperFactory<T extends Entity, S extends Dto> {
+public class MapperFactory {
 
     private static MapperFactory mapperFactoryInstance = null;
 
@@ -26,12 +26,10 @@ public class MapperFactory<T extends Entity, S extends Dto> {
         return mapperFactoryInstance;
     }
 
-    public Mapper<T, S> getMapper(Class entity) {
-        if (entity.equals(User.class)) {
-            Mapper mapper = new UserMapper();
-            return mapper;
-        } else {
-            throw new IllegalArgumentException();
-        }
+    public Mapper getMapper(Class clazz) {
+        if (clazz.equals(User.class)) return new UserMapper();
+        else throw new IllegalArgumentException();
     }
+
+
 }
