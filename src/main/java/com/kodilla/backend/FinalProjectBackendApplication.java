@@ -1,7 +1,5 @@
 package com.kodilla.backend;
 
-import com.kodilla.backend.repository.hotel.HotelRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,8 +12,7 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - (TO DO) make scheduler
-	// - (TO DO) two more saves to database
+	// - (TO DO) two more saves to database (FIX hotelEntityLite save)
 	// - (TO DO) search by user or not user and add it to database
 	// - (TO DO) finish mapperFactory
 	// - (TO DO) MAYBE DO SEARCH DROPDOWN MENU

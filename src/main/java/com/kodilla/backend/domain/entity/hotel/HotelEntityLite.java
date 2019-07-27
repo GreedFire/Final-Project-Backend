@@ -16,7 +16,6 @@ import javax.persistence.Table;
 )
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "MOST_INTERESTED_HOTELS")
@@ -24,4 +23,8 @@ public class HotelEntityLite {
 
     @Id
     private String destinationLocation;
+
+    public HotelEntityLite(String destinationLocation) {
+        this.destinationLocation = destinationLocation;
+    }
 }

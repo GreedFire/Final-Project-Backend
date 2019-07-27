@@ -57,16 +57,12 @@ public class HotelService {
     }
 
     public HotelLiteDto getMostSearchedLocation(){
+        HotelLiteDto result = new HotelLiteDto("");
         HotelEntityLite entity = database.getMostSearchedLocation();
         if(entity != null){
-            saveMostSearchedLocation(entity);
-            return mapper.mapToHotelLiteDto(entity);
+            result =  mapper.mapToHotelLiteDto(entity);
+            database.saveMostSearchedLocation(entity);
         }
-        else return new HotelLiteDto("");
-
-    }
-
-    public void saveMostSearchedLocation(HotelEntityLite entityLite){
-        database.saveMostSearchedLocation(entityLite);
+        return result;
     }
 }

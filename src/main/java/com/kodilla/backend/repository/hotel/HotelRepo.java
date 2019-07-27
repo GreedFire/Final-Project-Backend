@@ -10,12 +10,8 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface HotelRepo extends CrudRepository<HotelEntity, String> {
+
     @Override
     HotelEntity save(HotelEntity entity);
-
-
-
-
-
 
 }

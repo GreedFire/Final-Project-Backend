@@ -115,4 +115,10 @@ public class HotelMapper {
                 entity.getDestinationLocation()
         );
     }
+
+    public HotelEntityLite mapToHotelLiteEntity(HotelLiteDto dto){
+        return new HotelEntityLite(
+                dto.getDestinationLocation()
+        );
+    }
 }

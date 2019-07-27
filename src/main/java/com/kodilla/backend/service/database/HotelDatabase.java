@@ -65,7 +65,7 @@ public class HotelDatabase {
         return hotelEntityLiteRepo.retrieveMostInterestedLocation();
     }
 
-    public void saveMostSearchedLocation(HotelEntityLite entityLite){
-        hotelEntityLiteRepo.save(entityLite);
+    public void saveMostSearchedLocation(HotelEntityLite entity){
+        hotelEntityLiteRepo.save(entity);
     }
 }
