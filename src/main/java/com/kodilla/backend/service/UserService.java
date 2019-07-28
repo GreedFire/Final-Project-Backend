@@ -2,8 +2,6 @@ package com.kodilla.backend.service;
 
 import com.kodilla.backend.domain.dto.UserDto;
 import com.kodilla.backend.domain.entity.User;
-import com.kodilla.backend.mapper.Mapper;
-import com.kodilla.backend.mapper.MapperFactory;
 import com.kodilla.backend.mapper.mappers.UserMapper;
 import com.kodilla.backend.service.database.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,9 @@ public class UserService {
 
     @Autowired
     private UserDatabase database;
-    private Mapper<User, UserDto> mapper = (UserMapper) MapperFactory.getInstance().getMapper(User.class);
+
+    @Autowired
+    private UserMapper mapper;
 
     public Boolean createUser(UserDto userDto) {
         User user = mapper.mapToEntity(userDto);
