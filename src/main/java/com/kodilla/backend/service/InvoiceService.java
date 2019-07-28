@@ -1,9 +1,9 @@
 package com.kodilla.backend.service;
 
-import com.kodilla.backend.domain.dto.FlightInvoiceDto;
-import com.kodilla.backend.domain.dto.HotelInvoiceDto;
-import com.kodilla.backend.mapper.mappers.FlightInvoiceMapper;
-import com.kodilla.backend.mapper.mappers.HotelInvoiceMapper;
+import com.kodilla.backend.domain.dto.flight.FlightInvoiceDto;
+import com.kodilla.backend.domain.dto.hotel.HotelInvoiceDto;
+import com.kodilla.backend.mapper.FlightInvoiceMapper;
+import com.kodilla.backend.mapper.HotelInvoiceMapper;
 import com.kodilla.backend.service.database.InvoiceDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

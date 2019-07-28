@@ -1,13 +1,10 @@
 package com.kodilla.backend.domain.dto.hotel;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,25 +12,38 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HotelDto {
 
-    @JsonProperty("searchid")
-    private String searchId;
+    @JsonProperty("id")
+    private String id;
 
-    @JsonProperty("currency")
-    private String currency;
+    @JsonProperty("userrating")
+    private String userRating;
 
-    @JsonProperty("destinationLocation")
-    private String destinationLocation;
+    @JsonProperty("price")
+    private String price;
 
-    @JsonProperty("shareURL")
-    private String shareURL;
+    @JsonProperty("stars")
+    private int stars;
 
-    @JsonProperty("hotelset")
-    private List<HotelListDto> hotels;
+    @JsonProperty("name")
+    private String name;
 
-    public HotelDto(String searchId, String currency, String destinationLocation, String shareURL) {
-        this.searchId = searchId;
-        this.currency = currency;
-        this.destinationLocation = destinationLocation;
-        this.shareURL = shareURL;
-    }
+    @JsonProperty("phone")
+    private String phone;
+
+    @JsonProperty("address")
+    private String address;
+
+    @JsonProperty("city")
+    private String city;
+
+    @JsonProperty("country")
+    private String country;
+
+    @JsonProperty("displayaddress")
+    private String displayaddress;
+
+    @JsonProperty("thumburl")
+    private String thumburl;
+
+    private String HotelResponseId;
 }

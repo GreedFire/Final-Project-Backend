@@ -1,7 +1,7 @@
-package com.kodilla.backend.mapper.mappers;
+package com.kodilla.backend.mapper;
 
-import com.kodilla.backend.domain.dto.HotelInvoiceDto;
-import com.kodilla.backend.domain.entity.HotelInvoice;
+import com.kodilla.backend.domain.dto.hotel.HotelInvoiceDto;
+import com.kodilla.backend.domain.entity.hotel.HotelInvoice;
 import org.springframework.stereotype.Component;
 
 @Component

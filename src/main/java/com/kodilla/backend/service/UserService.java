@@ -2,7 +2,7 @@ package com.kodilla.backend.service;
 
 import com.kodilla.backend.domain.dto.UserDto;
 import com.kodilla.backend.domain.entity.User;
-import com.kodilla.backend.mapper.mappers.UserMapper;
+import com.kodilla.backend.mapper.UserMapper;
 import com.kodilla.backend.service.database.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

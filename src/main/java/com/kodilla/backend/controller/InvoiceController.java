@@ -1,7 +1,7 @@
 package com.kodilla.backend.controller;
 
-import com.kodilla.backend.domain.dto.FlightInvoiceDto;
-import com.kodilla.backend.domain.dto.HotelInvoiceDto;
+import com.kodilla.backend.domain.dto.flight.FlightInvoiceDto;
+import com.kodilla.backend.domain.dto.hotel.HotelInvoiceDto;
 import com.kodilla.backend.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

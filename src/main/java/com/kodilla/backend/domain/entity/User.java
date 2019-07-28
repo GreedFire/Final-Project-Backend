@@ -46,7 +46,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "USERS")
-public class User extends com.kodilla.backend.domain.entity.Entity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -4,7 +4,7 @@ import com.kodilla.backend.domain.dto.flight.location.FlightLocationResponseDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
-import com.kodilla.backend.mapper.mappers.FlightMapper;
+import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.service.database.FlightDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

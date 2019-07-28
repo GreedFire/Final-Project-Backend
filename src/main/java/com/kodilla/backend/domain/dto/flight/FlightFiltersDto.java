@@ -1,4 +1,4 @@
-package com.kodilla.backend.domain.dto;
+package com.kodilla.backend.domain.dto.flight;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.kodilla.backend.controller;
 
-import com.kodilla.backend.domain.dto.HotelFiltersDto;
-import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.domain.dto.hotel.HotelFiltersDto;
+import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +17,21 @@ public class HotelController {
     private HotelService service;
 
     @GetMapping
-    public List<HotelListDto> getHotels(@RequestParam int rooms, @RequestParam String location,
-                                        @RequestParam String checkin, @RequestParam String checkout,
-                                        @RequestParam int adults) {
+    public List<HotelDto> getHotels(@RequestParam int rooms, @RequestParam String location,
+                                    @RequestParam String checkin, @RequestParam String checkout,
+                                    @RequestParam int adults) {
         return service.getHotels(rooms, location, checkin, checkout, adults);
     }
 
     @GetMapping("/filter/{responseId}/")
-    public List<HotelListDto> getFilteredHotels(@PathVariable String responseId, @RequestParam Double rating, @RequestParam int stars,
-                                                @RequestParam int priceMore, @RequestParam int priceLess) {
+    public List<HotelDto> getFilteredHotels(@PathVariable String responseId, @RequestParam Double rating, @RequestParam int stars,
+                                            @RequestParam int priceMore, @RequestParam int priceLess) {
         return service.getFilteredHotels(responseId, rating, stars, priceMore, priceLess);
     }
 
 
     @GetMapping("/history")
-    public List<HotelListDto> getHotelSearchHistory() {
+    public List<HotelDto> getHotelSearchHistory() {
         return service.getHotelSearchHistory();
     }
 

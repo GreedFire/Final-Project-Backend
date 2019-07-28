@@ -1,7 +1,7 @@
 package com.kodilla.backend.service;
 
 import com.kodilla.backend.domain.dto.DeviceDto;
-import com.kodilla.backend.mapper.mappers.DeviceMapper;
+import com.kodilla.backend.mapper.DeviceMapper;
 import com.kodilla.backend.service.database.DeviceDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

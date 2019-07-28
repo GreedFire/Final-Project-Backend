@@ -1,4 +1,4 @@
-package com.kodilla.backend.domain.entity;
+package com.kodilla.backend.domain.entity.hotel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,20 +12,24 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "FLIGHT_FILTERS")
-public class FlightFilters {
+@Table(name = "HOTEL_FILTERS")
+public class HotelFilters {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String carrierClass;
+    private int rating;
+
+    private int stars;
 
     private BigDecimal priceMoreThan;
 
     private BigDecimal priceLessThan;
 
-    public FlightFilters(String carrierClass, BigDecimal priceMoreThan, BigDecimal priceLessThan) {
-        this.carrierClass = carrierClass;
+    public HotelFilters(int rating, int stars, BigDecimal priceMoreThan, BigDecimal priceLessThan) {
+        this.rating = rating;
+        this.stars = stars;
         this.priceMoreThan = priceMoreThan;
         this.priceLessThan = priceLessThan;
     }

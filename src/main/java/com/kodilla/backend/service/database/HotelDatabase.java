@@ -1,11 +1,11 @@
 package com.kodilla.backend.service.database;
 
-import com.kodilla.backend.domain.entity.HotelFilters;
+import com.kodilla.backend.domain.entity.hotel.HotelFilters;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
-import com.kodilla.backend.repository.HotelFiltersRepo;
+import com.kodilla.backend.repository.hotel.HotelFiltersRepo;
 import com.kodilla.backend.repository.hotel.HotelEntityLiteRepo;
 import com.kodilla.backend.repository.hotel.HotelListRepo;
 import com.kodilla.backend.repository.hotel.HotelLocationRepo;

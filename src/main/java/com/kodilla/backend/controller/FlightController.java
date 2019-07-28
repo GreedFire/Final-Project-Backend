@@ -1,6 +1,6 @@
 package com.kodilla.backend.controller;
 
-import com.kodilla.backend.domain.dto.FlightFiltersDto;
+import com.kodilla.backend.domain.dto.flight.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;

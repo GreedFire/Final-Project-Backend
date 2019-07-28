@@ -1,12 +1,12 @@
-package com.kodilla.backend.mapper.mappers;
+package com.kodilla.backend.mapper;
 
-import com.kodilla.backend.domain.dto.FlightFiltersDto;
+import com.kodilla.backend.domain.dto.flight.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.lists.SkyscannerFlightCarriersDto;
-import com.kodilla.backend.domain.entity.FlightFilters;
+import com.kodilla.backend.domain.entity.flight.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;

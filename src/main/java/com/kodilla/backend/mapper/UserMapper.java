@@ -1,4 +1,4 @@
-package com.kodilla.backend.mapper.mappers;
+package com.kodilla.backend.mapper;
 
 import com.kodilla.backend.domain.dto.UserDto;
 import com.kodilla.backend.domain.entity.User;

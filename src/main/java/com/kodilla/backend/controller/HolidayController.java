@@ -2,7 +2,7 @@ package com.kodilla.backend.controller;
 
 import com.kodilla.backend.domain.dto.HolidayDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.dto.hotel.HotelListDto;
+import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.service.FlightService;
 import com.kodilla.backend.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class HolidayController {
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,
                                  @RequestParam String destinationPlace, @RequestParam String checkin,
                                  @RequestParam String checkout, @RequestParam int adults) {
-        List<HotelListDto> hotels = hotelService.getHotels(rooms, destinationPlace, checkin, checkout, adults);
+        List<HotelDto> hotels = hotelService.getHotels(rooms, destinationPlace, checkin, checkout, adults);
         List<FlightDto> tripFlights = flightService.getFlights(originPlace, destinationPlace, checkin);
         List<FlightDto> returnFlights = flightService.getFlights(destinationPlace, originPlace, checkout);
 

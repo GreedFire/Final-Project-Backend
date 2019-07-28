@@ -1,6 +1,6 @@
 package com.kodilla.backend.repository.invoice;
 
-import com.kodilla.backend.domain.entity.HotelInvoice;
+import com.kodilla.backend.domain.entity.hotel.HotelInvoice;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

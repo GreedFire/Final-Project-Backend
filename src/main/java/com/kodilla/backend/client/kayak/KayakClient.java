@@ -1,9 +1,9 @@
 package com.kodilla.backend.client.kayak;
 
-import com.kodilla.backend.domain.dto.hotel.HotelDto;
+import com.kodilla.backend.domain.dto.hotel.HotelResponseDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
-import com.kodilla.backend.mapper.mappers.HotelMapper;
+import com.kodilla.backend.mapper.HotelMapper;
 import com.kodilla.backend.service.database.HotelDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,9 +74,9 @@ public class KayakClient {
             int citycode = getHotelLocationId(location);
             if(citycode != -1){
                 LOGGER.info("Getting hotels from Kayak API");
-                ResponseEntity<HotelDto> response = restTemplate.exchange(
+                ResponseEntity<HotelResponseDto> response = restTemplate.exchange(
                         prepareUrlForHotels(rooms, citycode, checkin, checkout, adults),
-                        HttpMethod.GET, prepareHeaders(), HotelDto.class);
+                        HttpMethod.GET, prepareHeaders(), HotelResponseDto.class);
 
                 if (response.getBody() != null) {
                     searchId = response.getBody().getSearchId();

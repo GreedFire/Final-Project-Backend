@@ -1,7 +1,7 @@
 package com.kodilla.backend.service.database;
 
-import com.kodilla.backend.domain.entity.FlightInvoice;
-import com.kodilla.backend.domain.entity.HotelInvoice;
+import com.kodilla.backend.domain.entity.flight.FlightInvoice;
+import com.kodilla.backend.domain.entity.hotel.HotelInvoice;
 import com.kodilla.backend.repository.invoice.FlightInvoiceRepo;
 import com.kodilla.backend.repository.invoice.HotelInvoiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;

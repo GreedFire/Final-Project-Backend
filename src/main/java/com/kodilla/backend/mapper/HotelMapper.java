@@ -1,11 +1,11 @@
-package com.kodilla.backend.mapper.mappers;
+package com.kodilla.backend.mapper;
 
-import com.kodilla.backend.domain.dto.HotelFiltersDto;
+import com.kodilla.backend.domain.dto.hotel.HotelFiltersDto;
+import com.kodilla.backend.domain.dto.hotel.HotelResponseDto;
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
-import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
-import com.kodilla.backend.domain.entity.HotelFilters;
+import com.kodilla.backend.domain.entity.hotel.HotelFilters;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 @Component
 public class HotelMapper {
 
-    public HotelEntity mapToHotelEntity(HotelDto hotelDto) {
+    public HotelEntity mapToHotelEntity(HotelResponseDto hotelResponseDto) {
         HotelEntity hotelResponseResult = new HotelEntity(
-                hotelDto.getSearchId(),
-                hotelDto.getCurrency(),
-                hotelDto.getDestinationLocation(),
-                hotelDto.getShareURL()
+                hotelResponseDto.getSearchId(),
+                hotelResponseDto.getCurrency(),
+                hotelResponseDto.getDestinationLocation(),
+                hotelResponseDto.getShareURL()
         );
-        List<HotelListEntity> hotelListEntity = hotelDto.getHotels().stream()
+        List<HotelListEntity> hotelListEntity = hotelResponseDto.getHotels().stream()
                 .map(hotelset -> new HotelListEntity(
                         hotelset.getId(),
                         Double.parseDouble(hotelset.getUserRating()),
@@ -45,9 +45,9 @@ public class HotelMapper {
         return hotelResponseResult;
     }
 
-    public List<HotelListDto> mapToHotelListDto(List<HotelListEntity> list) {
+    public List<HotelDto> mapToHotelListDto(List<HotelListEntity> list) {
         return list.stream()
-                .map(hotelset -> new HotelListDto(
+                .map(hotelset -> new HotelDto(
                         hotelset.getId(),
                         String.valueOf(hotelset.getUserRating()),
                         String.valueOf(hotelset.getPrice()),
@@ -63,16 +63,16 @@ public class HotelMapper {
                 )).collect(Collectors.toList());
     }
 
-    public HotelDto mapToHotelDto(HotelEntity hotelEntity) {
-        HotelDto hotelDto = new HotelDto(
+    public HotelResponseDto mapToHotelDto(HotelEntity hotelEntity) {
+        HotelResponseDto hotelResponseDto = new HotelResponseDto(
                 hotelEntity.getSearchId(),
                 hotelEntity.getCurrency(),
                 hotelEntity.getDestinationLocation(),
                 hotelEntity.getShareURL()
         );
 
-        List<HotelListDto> hotelListDto = hotelEntity.getHotels().stream()
-                .map(hotelset -> new HotelListDto(
+        List<HotelDto> hotelDto = hotelEntity.getHotels().stream()
+                .map(hotelset -> new HotelDto(
                         hotelset.getId(),
                         String.valueOf(hotelset.getUserRating()),
                         String.valueOf(hotelset.getPrice()),
@@ -86,8 +86,8 @@ public class HotelMapper {
                         hotelset.getThumburl(),
                         hotelset.getHotelEntity().getSearchId()
                 )).collect(Collectors.toList());
-        hotelDto.setHotels(hotelListDto);
-        return hotelDto;
+        hotelResponseDto.setHotels(hotelDto);
+        return hotelResponseDto;
     }
 
     public HotelLocationEntity mapToHotelLocationsEntity(HotelLocationDto hotelLocationDto, String writedCity) {

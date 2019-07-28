@@ -1,4 +1,4 @@
-package com.kodilla.backend.domain.dto;
+package com.kodilla.backend.domain.dto.hotel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,17 +10,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FlightInvoiceDto {
+public class HotelInvoiceDto {
     private long id;
     private LocalDate date;
     private BigDecimal price;
-    private long carrierId;
+    private long hotelId;
     private long userId;
 
-    public FlightInvoiceDto(LocalDate date, BigDecimal price, long carrierId, long userId) {
+    public HotelInvoiceDto(LocalDate date, BigDecimal price, long hotelId, long userId) {
         this.date = date;
         this.price = price;
-        this.carrierId = carrierId;
+        this.hotelId = hotelId;
         this.userId = userId;
     }
 }

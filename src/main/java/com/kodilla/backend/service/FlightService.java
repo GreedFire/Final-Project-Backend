@@ -1,12 +1,11 @@
 package com.kodilla.backend.service;
 
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
-import com.kodilla.backend.domain.dto.FlightFiltersDto;
+import com.kodilla.backend.domain.dto.flight.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
-import com.kodilla.backend.domain.entity.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
-import com.kodilla.backend.mapper.mappers.FlightMapper;
+import com.kodilla.backend.mapper.FlightMapper;
 import com.kodilla.backend.service.database.FlightDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

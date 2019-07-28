@@ -1,7 +1,7 @@
-package com.kodilla.backend.mapper.mappers;
+package com.kodilla.backend.mapper;
 
-import com.kodilla.backend.domain.dto.FlightInvoiceDto;
-import com.kodilla.backend.domain.entity.FlightInvoice;
+import com.kodilla.backend.domain.dto.flight.FlightInvoiceDto;
+import com.kodilla.backend.domain.entity.flight.FlightInvoice;
 import org.springframework.stereotype.Component;
 
 @Component

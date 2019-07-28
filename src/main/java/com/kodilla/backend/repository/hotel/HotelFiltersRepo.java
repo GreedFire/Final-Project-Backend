@@ -1,6 +1,6 @@
-package com.kodilla.backend.repository;
+package com.kodilla.backend.repository.hotel;
 
-import com.kodilla.backend.domain.entity.HotelFilters;
+import com.kodilla.backend.domain.entity.hotel.HotelFilters;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,6 @@
-package com.kodilla.backend.domain.entity;
+package com.kodilla.backend.domain.entity.hotel;
 
+import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "FLIGHT_INVOICE")
-public class FlightInvoice {
+@Table(name = "HOTEL_INVOICE")
+public class HotelInvoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -23,14 +25,14 @@ public class FlightInvoice {
 
     private BigDecimal price;
 
-    private long carrierId;
+    private long hotelId;
 
     private long userId;
 
-    public FlightInvoice(LocalDate date, BigDecimal price, long carrierId, long userId) {
+    public HotelInvoice(LocalDate date, BigDecimal price, long hotelId, long userId) {
         this.date = date;
         this.price = price;
-        this.carrierId = carrierId;
+        this.hotelId = hotelId;
         this.userId = userId;
     }
 }

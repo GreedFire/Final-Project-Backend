@@ -1,6 +1,6 @@
 package com.kodilla.backend.repository.invoice;
 
-import com.kodilla.backend.domain.entity.FlightInvoice;
+import com.kodilla.backend.domain.entity.flight.FlightInvoice;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
