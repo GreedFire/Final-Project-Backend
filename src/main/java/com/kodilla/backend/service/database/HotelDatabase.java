@@ -1,9 +1,11 @@
 package com.kodilla.backend.service.database;
 
+import com.kodilla.backend.domain.entity.HotelFilters;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
+import com.kodilla.backend.repository.HotelFiltersRepo;
 import com.kodilla.backend.repository.hotel.HotelEntityLiteRepo;
 import com.kodilla.backend.repository.hotel.HotelListRepo;
 import com.kodilla.backend.repository.hotel.HotelLocationRepo;
@@ -29,6 +31,9 @@ public class HotelDatabase {
 
     @Autowired
     private HotelEntityLiteRepo hotelEntityLiteRepo;
+
+    @Autowired
+    private HotelFiltersRepo hotelFiltersRepo;
 
     public HotelEntity saveHotel(HotelEntity hotelEntity) {
         return hotelRepo.save(hotelEntity);
@@ -67,5 +72,9 @@ public class HotelDatabase {
 
     public void saveMostSearchedLocation(){
         hotelEntityLiteRepo.saveMostSearchedLocation();
+    }
+
+    public void saveHotelFilters(HotelFilters hotelFilters){
+        hotelFiltersRepo.save(hotelFilters);
     }
 }

@@ -1,5 +1,6 @@
 package com.kodilla.backend.controller;
 
+import com.kodilla.backend.domain.dto.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class FlightController {
     @GetMapping("/history")
     public List<FlightDto> getHotelSearchHistory() {
         return service.getHotelSearchHistory();
+    }
+
+    @PostMapping("/filter")
+    public void saveFlightFilters(@RequestBody FlightFiltersDto flightFiltersDto){
+        service.saveFlightFilters(flightFiltersDto);
     }
 
 

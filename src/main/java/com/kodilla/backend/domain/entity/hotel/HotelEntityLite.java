@@ -27,7 +27,6 @@ public class HotelEntityLite {
     @Id
     private String destinationLocation;
 
-
     public HotelEntityLite(String destinationLocation) {
         this.destinationLocation = destinationLocation;
     }

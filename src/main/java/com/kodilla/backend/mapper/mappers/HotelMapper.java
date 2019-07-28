@@ -1,9 +1,11 @@
 package com.kodilla.backend.mapper.mappers;
 
+import com.kodilla.backend.domain.dto.HotelFiltersDto;
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
+import com.kodilla.backend.domain.entity.HotelFilters;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
@@ -119,6 +121,15 @@ public class HotelMapper {
     public HotelEntityLite mapToHotelLiteEntity(HotelLiteDto dto){
         return new HotelEntityLite(
                 dto.getDestinationLocation()
+        );
+    }
+
+    public HotelFilters mapToHotelFiltersEntity(HotelFiltersDto dto){
+        return new HotelFilters(
+                dto.getRating(),
+                dto.getStars(),
+                dto.getPriceMoreThan(),
+                dto.getPriceLessThan()
         );
     }
 }

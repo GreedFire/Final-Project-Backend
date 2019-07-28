@@ -1,8 +1,10 @@
 package com.kodilla.backend.service;
 
 import com.kodilla.backend.client.kayak.KayakClient;
+import com.kodilla.backend.domain.dto.HotelFiltersDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
+import com.kodilla.backend.domain.entity.HotelFilters;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.mapper.mappers.HotelMapper;
 import com.kodilla.backend.service.database.HotelDatabase;
@@ -65,5 +67,9 @@ public class HotelService {
         }
 
         return result;
+    }
+
+    public void saveHotelFilters(HotelFiltersDto hotelFiltersDto){
+        database.saveHotelFilters(mapper.mapToHotelFiltersEntity(hotelFiltersDto));
     }
 }

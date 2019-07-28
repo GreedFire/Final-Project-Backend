@@ -1,8 +1,10 @@
 package com.kodilla.backend.service;
 
 import com.kodilla.backend.client.skyscanner.SkyscannerClient;
+import com.kodilla.backend.domain.dto.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
+import com.kodilla.backend.domain.entity.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.mapper.mappers.FlightMapper;
 import com.kodilla.backend.service.database.FlightDatabase;
@@ -65,6 +67,10 @@ public class FlightService {
 
     public List<FlightDto> getHotelSearchHistory() {
         return mapper.mapToFlightDtoList(database.getSearchHistory());
+    }
+
+    public void saveFlightFilters(FlightFiltersDto flightFiltersDto){
+        database.saveFlightFilters(mapper.mapToFlightFiltersEntity(flightFiltersDto));
     }
 
 }

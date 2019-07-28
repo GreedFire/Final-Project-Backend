@@ -1,8 +1,10 @@
 package com.kodilla.backend.service.database;
 
+import com.kodilla.backend.domain.entity.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
+import com.kodilla.backend.repository.FlightFiltersRepo;
 import com.kodilla.backend.repository.flight.FlightCarriersRepo;
 import com.kodilla.backend.repository.flight.FlightLocationRepo;
 import com.kodilla.backend.repository.flight.FlightResponseRepo;
@@ -25,6 +27,9 @@ public class FlightDatabase {
 
     @Autowired
     private FlightCarriersRepo flightCarriersRepo;
+
+    @Autowired
+    private FlightFiltersRepo flightFiltersRepo;
 
     public FlightReponseEntity saveFlightResponse(FlightReponseEntity entity) {
         return flightResponseRepo.save(entity);
@@ -62,5 +67,9 @@ public class FlightDatabase {
 
     public List<FlightCarriersEntity> getFilteredFlights(long responseId, String planeClass, int priceMoreThan, int priceLessThan) {
         return flightCarriersRepo.retrieveFilteredFlights(responseId, planeClass, priceMoreThan, priceLessThan);
+    }
+
+    public void saveFlightFilters(FlightFilters flightFilters){
+        flightFiltersRepo.save(flightFilters);
     }
 }

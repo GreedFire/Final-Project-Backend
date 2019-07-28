@@ -1,5 +1,6 @@
 package com.kodilla.backend.controller;
 
+import com.kodilla.backend.domain.dto.HotelFiltersDto;
 import com.kodilla.backend.domain.dto.hotel.HotelListDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.service.HotelService;
@@ -42,6 +43,11 @@ public class HotelController {
     @GetMapping("/location/mostInterested")
     public HotelLiteDto getMostSearchedLocation(){
         return service.getMostSearchedLocation();
+    }
+
+    @PostMapping("/filter")
+    public void saveHotelFilters(@RequestBody HotelFiltersDto hotelFiltersDto){
+        service.saveHotelFilters(hotelFiltersDto);
     }
 
 }
