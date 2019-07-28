@@ -1,6 +1,7 @@
 package com.kodilla.backend.repository.hotel;
 
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,9 @@ public interface HotelEntityLiteRepo extends CrudRepository<HotelEntityLite, Str
     HotelEntityLite save(HotelEntityLite entityLite);
 
     @Query(nativeQuery = true)
-    HotelEntityLite retrieveMostInterestedLocation();
+    HotelEntityLite retrieveMostSearchedLocation();
+
+    @Modifying
+    @Query(nativeQuery = true)
+    void saveMostSearchedLocation();
 }

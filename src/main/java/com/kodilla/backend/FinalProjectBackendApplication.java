@@ -8,11 +8,10 @@ public class FinalProjectBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectBackendApplication.class, args);
-
 	}
 
 	//TODO:
-	// - (TO DO) two more saves to database (FIX hotelEntityLite save)
+	// - (TO DO) one more save to database
 	// - (TO DO) search by user or not user and add it to database
 	// - (TO DO) finish mapperFactory
 	// - (TO DO) MAYBE DO SEARCH DROPDOWN MENU

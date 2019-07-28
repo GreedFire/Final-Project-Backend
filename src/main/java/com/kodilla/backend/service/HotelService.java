@@ -61,8 +61,9 @@ public class HotelService {
         HotelEntityLite entity = database.getMostSearchedLocation();
         if(entity != null){
             result =  mapper.mapToHotelLiteDto(entity);
-            database.saveMostSearchedLocation(entity);
+            database.saveMostSearchedLocation();
         }
+
         return result;
     }
 }
