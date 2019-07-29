@@ -25,9 +25,9 @@ public class FlightController {
     @GetMapping("filter/{responseId}/")
     public List<FlightDto> getFilteredFlights(@PathVariable long responseId,
                                               @RequestParam String carrierClass,
-                                              @RequestParam int priceMoreThan,
-                                              @RequestParam int priceLessThan) {
+                                              @RequestParam int priceMoreThan, @RequestParam int priceLessThan) {
         return service.getFilteredFlights(responseId, carrierClass, priceMoreThan, priceLessThan);
+
     }
 
     @GetMapping("/locations/{place}")

@@ -1,12 +1,8 @@
 package com.kodilla.backend.service;
 
 import com.kodilla.backend.client.kayak.KayakClient;
-import com.kodilla.backend.domain.dto.hotel.HotelDto;
-import com.kodilla.backend.domain.dto.hotel.HotelFiltersDto;
-import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelFilters;
-import com.kodilla.backend.domain.entity.hotel.HotelResponseEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
 import com.kodilla.backend.service.database.HotelDatabase;
 import org.springframework.beans.factory.annotation.Autowired;

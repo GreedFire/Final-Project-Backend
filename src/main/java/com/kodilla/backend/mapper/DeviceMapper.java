@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DeviceMapper {
-    public Device mapToEntity(DeviceDto dto){
+    public Device mapToEntity(DeviceDto dto) {
         return new Device(
                 dto.getIpAddress(),
                 dto.getHostName(),
                 dto.getOS()
         );
+        
     }
 }

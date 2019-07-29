@@ -5,7 +5,6 @@ import com.kodilla.backend.domain.dto.flight.FlightDto;
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.facade.HotelFacade;
 import com.kodilla.backend.service.FlightService;
-import com.kodilla.backend.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ public class HolidayController {
 
     @Autowired
     private FlightService flightService;
-
 
     @GetMapping
     public HolidayDto getHoliday(@RequestParam int rooms, @RequestParam String originPlace,

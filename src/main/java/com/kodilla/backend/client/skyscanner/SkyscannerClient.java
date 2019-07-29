@@ -75,7 +75,7 @@ public class SkyscannerClient {
                     HttpMethod.GET, prepareHeaders(), SkyscannerFlightReponseDto.class);
 
             if (response.getBody() != null) {
-                FlightReponseEntity entity = mapper.mapToReponseEntity(response.getBody());
+                FlightReponseEntity entity = mapper.mapToResponseEntity(response.getBody());
                 LOGGER.info("Saving flights to database");
                 if (database.getFlightsByDepartureDateAndOriginAndDestination(entity.getDepartureDate(), entity.getOrigin(), entity.getDestination()).size() == 0) {
                     database.saveFlightResponse(entity);

@@ -101,7 +101,7 @@ public class FlightMapper {
         return result;
     }
 
-    public FlightReponseEntity mapToReponseEntity(SkyscannerFlightReponseDto skyscannerFlightReponseDto) {
+    public FlightReponseEntity mapToResponseEntity(SkyscannerFlightReponseDto skyscannerFlightReponseDto) {
         BigDecimal price = new BigDecimal(skyscannerFlightReponseDto.getQuotes().get(0).getPrice().intValue());
         Random generator = new Random();
         String dateText = skyscannerFlightReponseDto.getQuotes().get(0).getOutBoundLeg().getDepartureDate(); // "2019-09-01T00:00:00" format
