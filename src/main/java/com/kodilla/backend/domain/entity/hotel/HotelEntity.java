@@ -5,31 +5,64 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@NamedNativeQuery(
+        name = "HotelEntity.retrieveFilteredHotels",
+        query = "SELECT * FROM HOTELS WHERE HOTEL_ENTITY_ID = :RESPONSEID AND USER_RATING >= :RATING AND STARS >= :STARS AND PRICE BETWEEN :PRICEMORE AND :PRICELESS",
+        resultClass = HotelEntity.class
+)
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "HOTEL_RESPONSES")
+@Table(name = "HOTELS")
 public class HotelEntity {
 
     @Id
-    private String searchId;
+    private String id;
 
-    private String currency;
+    private Double userRating;
 
-    private String destinationLocation;
+    private BigDecimal price;
 
-    private String shareURL;
+    private int stars;
 
-    @OneToMany(targetEntity = HotelListEntity.class, mappedBy = "hotelEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<HotelListEntity> hotels;
+    private String name;
 
-    public HotelEntity(String searchId, String currency, String destinationLocation, String shareURL) {
-        this.searchId = searchId;
-        this.currency = currency;
-        this.destinationLocation = destinationLocation;
-        this.shareURL = shareURL;
+    private String phone;
+
+    private String address;
+
+    private String city;
+
+    private String country;
+
+    private String displayaddress;
+
+    private String thumburl;
+
+    private LocalDate searchDate;
+
+    @ManyToOne
+    @JoinColumn(name = "Hotel_Entity_ID")
+    private HotelResponseEntity hotelResponseEntity;
+
+    public HotelEntity(String id, Double userRating, BigDecimal price, int stars, String name, String phone, String address, String city, String country, String displayaddress, String thumburl, HotelResponseEntity hotelResponseEntity) {
+        this.id = id;
+        this.userRating = userRating;
+        this.price = price;
+        this.stars = stars;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.displayaddress = displayaddress;
+        this.thumburl = thumburl;
+        this.searchDate =  LocalDate.now();
+        this.hotelResponseEntity = hotelResponseEntity;
     }
 }

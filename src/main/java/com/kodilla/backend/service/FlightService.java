@@ -48,9 +48,9 @@ public class FlightService {
                                               int priceMoreThan,
                                               int priceLessThan) {
         List<FlightDto> resultList = new ArrayList<>();
-        Optional<FlightReponseEntity> flightReponseEntity = database.getFlightResponseById(responseId);
-        if (flightReponseEntity.isPresent()) {
-            FlightDto flightDto = mapper.mapToFlightDto(flightReponseEntity.get());
+        Optional<FlightReponseEntity> flightResponseEntity = database.getFlightResponseById(responseId);
+        if (flightResponseEntity.isPresent()) {
+            FlightDto flightDto = mapper.mapToFlightDto(flightResponseEntity.get());
             List<FlightCarriersDto> carriersListDto = mapper.mapToFlightCarriersListDto(
                     database.getFilteredFlights(responseId, carrierClass, priceMoreThan, priceLessThan));
             flightDto.setCarriers(carriersListDto);

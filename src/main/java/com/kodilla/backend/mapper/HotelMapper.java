@@ -6,9 +6,9 @@ import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLocationDto;
 import com.kodilla.backend.domain.entity.hotel.HotelFilters;
-import com.kodilla.backend.domain.entity.hotel.HotelEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelResponseEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
-import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
 import org.springframework.stereotype.Component;
 
@@ -19,15 +19,15 @@ import java.util.stream.Collectors;
 @Component
 public class HotelMapper {
 
-    public HotelEntity mapToHotelEntity(HotelResponseDto hotelResponseDto) {
-        HotelEntity hotelResponseResult = new HotelEntity(
+    public HotelResponseEntity mapToHotelEntity(HotelResponseDto hotelResponseDto) {
+        HotelResponseEntity hotelResponseResult = new HotelResponseEntity(
                 hotelResponseDto.getSearchId(),
                 hotelResponseDto.getCurrency(),
                 hotelResponseDto.getDestinationLocation(),
                 hotelResponseDto.getShareURL()
         );
-        List<HotelListEntity> hotelListEntity = hotelResponseDto.getHotels().stream()
-                .map(hotelset -> new HotelListEntity(
+        List<HotelEntity> hotelEntity = hotelResponseDto.getHotels().stream()
+                .map(hotelset -> new HotelEntity(
                         hotelset.getId(),
                         Double.parseDouble(hotelset.getUserRating()),
                         new BigDecimal(hotelset.getPrice().substring(1)),
@@ -41,11 +41,11 @@ public class HotelMapper {
                         hotelset.getThumburl(),
                         hotelResponseResult
                 )).collect(Collectors.toList());
-        hotelResponseResult.setHotels(hotelListEntity);
+        hotelResponseResult.setHotels(hotelEntity);
         return hotelResponseResult;
     }
 
-    public List<HotelDto> mapToHotelListDto(List<HotelListEntity> list) {
+    public List<HotelDto> mapToHotelListDto(List<HotelEntity> list) {
         return list.stream()
                 .map(hotelset -> new HotelDto(
                         hotelset.getId(),
@@ -59,19 +59,19 @@ public class HotelMapper {
                         hotelset.getCountry(),
                         hotelset.getDisplayaddress(),
                         hotelset.getThumburl(),
-                        hotelset.getHotelEntity().getSearchId()
+                        hotelset.getHotelResponseEntity().getSearchId()
                 )).collect(Collectors.toList());
     }
 
-    public HotelResponseDto mapToHotelDto(HotelEntity hotelEntity) {
+    public HotelResponseDto mapToHotelDto(HotelResponseEntity hotelResponseEntity) {
         HotelResponseDto hotelResponseDto = new HotelResponseDto(
-                hotelEntity.getSearchId(),
-                hotelEntity.getCurrency(),
-                hotelEntity.getDestinationLocation(),
-                hotelEntity.getShareURL()
+                hotelResponseEntity.getSearchId(),
+                hotelResponseEntity.getCurrency(),
+                hotelResponseEntity.getDestinationLocation(),
+                hotelResponseEntity.getShareURL()
         );
 
-        List<HotelDto> hotelDto = hotelEntity.getHotels().stream()
+        List<HotelDto> hotelDto = hotelResponseEntity.getHotels().stream()
                 .map(hotelset -> new HotelDto(
                         hotelset.getId(),
                         String.valueOf(hotelset.getUserRating()),
@@ -84,7 +84,7 @@ public class HotelMapper {
                         hotelset.getCountry(),
                         hotelset.getDisplayaddress(),
                         hotelset.getThumburl(),
-                        hotelset.getHotelEntity().getSearchId()
+                        hotelset.getHotelResponseEntity().getSearchId()
                 )).collect(Collectors.toList());
         hotelResponseDto.setHotels(hotelDto);
         return hotelResponseDto;

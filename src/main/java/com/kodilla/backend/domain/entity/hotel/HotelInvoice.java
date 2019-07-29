@@ -1,6 +1,5 @@
 package com.kodilla.backend.domain.entity.hotel;
 
-import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

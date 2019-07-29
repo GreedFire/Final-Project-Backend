@@ -97,7 +97,7 @@ public class KayakClient {
         try {
             LOGGER.info("Trying to find hotel location from database");
             if (database.getHotelLocationByLocationName(location).size() > 0) {
-                //For now always getting 0
+                //For now always getting 0 - first location
                 cityCode = mapper.mapToHotelLocationsDto(database.getHotelLocationByLocationName(location).get(0)).getCityId();
             } else {
                 LOGGER.info("Getting location of hotels from Kayak API");

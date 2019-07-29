@@ -3,7 +3,7 @@ package com.kodilla.backend.controller;
 import com.kodilla.backend.domain.dto.hotel.HotelFiltersDto;
 import com.kodilla.backend.domain.dto.hotel.HotelDto;
 import com.kodilla.backend.domain.dto.hotel.HotelLiteDto;
-import com.kodilla.backend.service.HotelService;
+import com.kodilla.backend.facade.HotelFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,40 +14,40 @@ import java.util.List;
 public class HotelController {
 
     @Autowired
-    private HotelService service;
+    private HotelFacade facade;
 
     @GetMapping
     public List<HotelDto> getHotels(@RequestParam int rooms, @RequestParam String location,
                                     @RequestParam String checkin, @RequestParam String checkout,
                                     @RequestParam int adults) {
-        return service.getHotels(rooms, location, checkin, checkout, adults);
+        return facade.getHotels(rooms, location, checkin, checkout, adults);
     }
 
     @GetMapping("/filter/{responseId}/")
     public List<HotelDto> getFilteredHotels(@PathVariable String responseId, @RequestParam Double rating, @RequestParam int stars,
                                             @RequestParam int priceMore, @RequestParam int priceLess) {
-        return service.getFilteredHotels(responseId, rating, stars, priceMore, priceLess);
+        return facade.getFilteredHotels(responseId, rating, stars, priceMore, priceLess);
     }
 
 
     @GetMapping("/history")
     public List<HotelDto> getHotelSearchHistory() {
-        return service.getHotelSearchHistory();
+        return facade.getHotelSearchHistory();
     }
 
     @GetMapping("/locations/{location}")
     public Integer getLocations(@PathVariable String location) {
-        return service.getLocations(location);
+        return facade.getLocations(location);
     }
 
     @GetMapping("/location/mostInterested")
     public HotelLiteDto getMostSearchedLocation(){
-        return service.getMostSearchedLocation();
+        return facade.getMostSearchedLocation();
     }
 
     @PostMapping("/filter")
     public void saveHotelFilters(@RequestBody HotelFiltersDto hotelFiltersDto){
-        service.saveHotelFilters(hotelFiltersDto);
+        facade.saveHotelFilters(hotelFiltersDto);
     }
 
 }

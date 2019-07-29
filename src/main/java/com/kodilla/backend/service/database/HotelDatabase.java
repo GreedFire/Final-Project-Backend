@@ -1,15 +1,15 @@
 package com.kodilla.backend.service.database;
 
 import com.kodilla.backend.domain.entity.hotel.HotelFilters;
-import com.kodilla.backend.domain.entity.hotel.HotelEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelResponseEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelEntityLite;
-import com.kodilla.backend.domain.entity.hotel.HotelListEntity;
+import com.kodilla.backend.domain.entity.hotel.HotelEntity;
 import com.kodilla.backend.domain.entity.hotel.HotelLocationEntity;
 import com.kodilla.backend.repository.hotel.HotelFiltersRepo;
 import com.kodilla.backend.repository.hotel.HotelEntityLiteRepo;
-import com.kodilla.backend.repository.hotel.HotelListRepo;
-import com.kodilla.backend.repository.hotel.HotelLocationRepo;
 import com.kodilla.backend.repository.hotel.HotelRepo;
+import com.kodilla.backend.repository.hotel.HotelLocationRepo;
+import com.kodilla.backend.repository.hotel.HoteResponselRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +21,13 @@ import java.util.Optional;
 public class HotelDatabase {
 
     @Autowired
-    private HotelRepo hotelRepo;
+    private HoteResponselRepo hoteResponselRepo;
 
     @Autowired
     private HotelLocationRepo hotelLocationRepo;
 
     @Autowired
-    private HotelListRepo hotelListRepo;
+    private HotelRepo hotelRepo;
 
     @Autowired
     private HotelEntityLiteRepo hotelEntityLiteRepo;
@@ -35,12 +35,12 @@ public class HotelDatabase {
     @Autowired
     private HotelFiltersRepo hotelFiltersRepo;
 
-    public HotelEntity saveHotel(HotelEntity hotelEntity) {
-        return hotelRepo.save(hotelEntity);
+    public HotelResponseEntity saveHotel(HotelResponseEntity hotelResponseEntity) {
+        return hoteResponselRepo.save(hotelResponseEntity);
     }
 
-    public List<HotelListEntity> getSearchHistory() {
-        return hotelListRepo.findAllBySearchDateAfter(LocalDate.now().minusDays(1));
+    public List<HotelEntity> getSearchHistory() {
+        return hotelRepo.findAllBySearchDateAfter(LocalDate.now().minusDays(1));
     }
 
     public void saveHotelLocations(HotelLocationEntity location) {
@@ -57,13 +57,13 @@ public class HotelDatabase {
         return hotelLocationRepo.findByWritedCity(location);
     }
 
-    public List<HotelListEntity> getFilteredHotels(String responseId, Double rating, int stars,
-                                                   int priceMore, int priceLess) {
-        return hotelListRepo.retrieveFilteredHotels(responseId, rating, stars, priceMore, priceLess);
+    public List<HotelEntity> getFilteredHotels(String responseId, Double rating, int stars,
+                                               int priceMore, int priceLess) {
+        return hotelRepo.retrieveFilteredHotels(responseId, rating, stars, priceMore, priceLess);
     }
 
-    public List<HotelListEntity> getHotelsBySearchId(String searchId) {
-        return hotelListRepo.findByHotelEntity_SearchId(searchId);
+    public List<HotelEntity> getHotelsBySearchId(String searchId) {
+        return hotelRepo.findByHotelResponseEntity_SearchId(searchId);
     }
 
     public HotelEntityLite getMostSearchedLocation(){
