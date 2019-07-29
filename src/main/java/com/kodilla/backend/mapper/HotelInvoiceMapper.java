@@ -14,14 +14,4 @@ public class HotelInvoiceMapper {
                 dto.getUserId()
         );
     }
-
-    public HotelInvoiceDto mapToDto(HotelInvoice entity){
-        return new HotelInvoiceDto(
-                entity.getId(),
-                entity.getDate(),
-                entity.getPrice(),
-                entity.getHotelId(),
-                entity.getUserId()
-        );
-    }
 }

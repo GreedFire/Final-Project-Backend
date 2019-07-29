@@ -14,13 +14,4 @@ public class FlightInvoiceMapper {
                 dto.getUserId()
         );
     }
-
-    public FlightInvoiceDto mapToDto(FlightInvoice entity){
-        return new FlightInvoiceDto(
-                entity.getDate(),
-                entity.getPrice(),
-                entity.getCarrierId(),
-                entity.getUserId()
-        );
-    }
 }

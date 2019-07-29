@@ -1,13 +1,13 @@
 package com.kodilla.backend.mapper;
 
-import com.kodilla.backend.domain.dto.flight.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.FlightCarriersDto;
 import com.kodilla.backend.domain.dto.flight.FlightDto;
+import com.kodilla.backend.domain.dto.flight.FlightFiltersDto;
 import com.kodilla.backend.domain.dto.flight.location.FlightLocationDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.SkyscannerFlightReponseDto;
 import com.kodilla.backend.domain.dto.flight.skyscanner.lists.SkyscannerFlightCarriersDto;
-import com.kodilla.backend.domain.entity.flight.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
+import com.kodilla.backend.domain.entity.flight.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import org.springframework.stereotype.Component;
@@ -149,20 +149,11 @@ public class FlightMapper {
                 )).collect(Collectors.toList());
     }
 
-    public List<FlightLocationDto> mapToLocationDtoList(List<FlightLocationEntity> locationEntityList) {
-        return locationEntityList.stream()
-                .map(location -> new FlightLocationDto(
-                        location.getPlaceId(),
-                        location.getPlaceName(),
-                        location.getCountryName()
-                )).collect(Collectors.toList());
-    }
-
-    public FlightFilters mapToFlightFiltersEntity(FlightFiltersDto dto){
+    public FlightFilters mapToFlightFiltersEntity(FlightFiltersDto dto) {
         return new FlightFilters(
-          dto.getCarrierClass(),
-          dto.getPriceMoreThan(),
-          dto.getPriceLessThan()
+                dto.getCarrierClass(),
+                dto.getPriceMoreThan(),
+                dto.getPriceLessThan()
         );
     }
 

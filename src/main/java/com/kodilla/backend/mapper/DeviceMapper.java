@@ -13,12 +13,4 @@ public class DeviceMapper {
                 dto.getOS()
         );
     }
-
-    public DeviceDto mapToDto(Device entity){
-        return new DeviceDto(
-                entity.getIpAddress(),
-                entity.getHostName(),
-                entity.getOS()
-        );
-    }
 }
