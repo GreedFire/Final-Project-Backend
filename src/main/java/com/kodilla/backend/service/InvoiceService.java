@@ -26,5 +26,7 @@ public class InvoiceService {
 
     public void saveFlightInvoice(FlightInvoiceDto flightInvoiceDto){
         database.saveFlightInvoice(flightMapper.mapToEntity(flightInvoiceDto));
+        
     }
+
 }

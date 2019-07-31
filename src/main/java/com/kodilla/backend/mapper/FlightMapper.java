@@ -81,7 +81,6 @@ public class FlightMapper {
 
         result.setCarriers(carriers);
         return result;
-
     }
 
     private String generateCarrierClass() {
@@ -139,13 +138,13 @@ public class FlightMapper {
         return reponseEntity;
     }
 
-    public List<FlightLocationEntity> mapToLocationEntityList(List<FlightLocationDto> locationDtoList, String writedLocation) {
+    public List<FlightLocationEntity> mapToLocationEntityList(List<FlightLocationDto> locationDtoList, String writtenLocation) {
         return locationDtoList.stream()
                 .map(location -> new FlightLocationEntity(
                         location.getPlaceId(),
                         location.getPlaceName(),
                         location.getCountryName(),
-                        writedLocation
+                        writtenLocation
                 )).collect(Collectors.toList());
     }
 

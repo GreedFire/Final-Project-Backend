@@ -1,6 +1,5 @@
 package com.kodilla.backend.domain.entity.flight;
 
-import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -37,5 +37,6 @@ public class FlightReponseEntity {
         this.origin = origin;
         this.destination = destination;
         this.searchDate = LocalDate.now();
+        this.carriers = new ArrayList<>();
     }
 }

@@ -4,10 +4,10 @@ import com.kodilla.backend.domain.entity.flight.FlightFilters;
 import com.kodilla.backend.domain.entity.flight.FlightCarriersEntity;
 import com.kodilla.backend.domain.entity.flight.FlightReponseEntity;
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
-import com.kodilla.backend.repository.flight.FlightFiltersRepo;
-import com.kodilla.backend.repository.flight.FlightCarriersRepo;
-import com.kodilla.backend.repository.flight.FlightLocationRepo;
-import com.kodilla.backend.repository.flight.FlightResponseRepo;
+import com.kodilla.backend.repository.FlightFiltersRepo;
+import com.kodilla.backend.repository.FlightCarriersRepo;
+import com.kodilla.backend.repository.FlightLocationRepo;
+import com.kodilla.backend.repository.FlightResponseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.kodilla.backend.repository.flight;
+package com.kodilla.backend.repository;
 
 import com.kodilla.backend.domain.entity.flight.location.FlightLocationEntity;
 import org.springframework.data.repository.CrudRepository;

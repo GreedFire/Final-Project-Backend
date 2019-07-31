@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class HotelMapper {
 
-    public HotelResponseEntity mapToHotelEntity(HotelResponseDto hotelResponseDto) {
+    public HotelResponseEntity mapToHotelResponseEntity(HotelResponseDto hotelResponseDto) {
         HotelResponseEntity hotelResponseResult = new HotelResponseEntity(
                 hotelResponseDto.getSearchId(),
                 hotelResponseDto.getCurrency(),
@@ -62,11 +62,11 @@ public class HotelMapper {
         );
     }
 
-    public List<HotelLocationEntity> mapToHotelLocationEntityList(List<HotelLocationDto> hotelLocationDtoList, String writedLocation) {
+    public List<HotelLocationEntity> mapToHotelLocationEntityList(List<HotelLocationDto> hotelLocationDtoList, String writtenLocation) {
         return hotelLocationDtoList.stream()
                 .map(location -> new HotelLocationEntity(
                         location.getCityId(),
-                        writedLocation
+                        writtenLocation
                 ))
                 .collect(Collectors.toList());
     }

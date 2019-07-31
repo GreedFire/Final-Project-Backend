@@ -81,7 +81,7 @@ public class KayakClient {
                 if (response.getBody() != null) {
                     searchId = response.getBody().getSearchId();
                     LOGGER.info("Saving hotels to database");
-                    database.saveHotel(mapper.mapToHotelEntity(response.getBody()));
+                    database.saveHotel(mapper.mapToHotelResponseEntity(response.getBody()));
                 }
             }
         } catch (RestClientException e) {
