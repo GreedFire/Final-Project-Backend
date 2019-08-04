@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/invoices")
 public class InvoiceController {
-
     @Autowired
     private InvoiceService service;
 
     @PostMapping("/hotels")
-    public void saveHotelInvoice(@RequestBody HotelInvoiceDto hotelInvoiceDto){
+    public void saveHotelInvoice(@RequestBody HotelInvoiceDto hotelInvoiceDto) {
         service.saveHotelInvoice(hotelInvoiceDto);
     }
 
     @PostMapping("/flights")
-    public void saveFlightInvoice(@RequestBody FlightInvoiceDto flightInvoiceDto){
+    public void saveFlightInvoice(@RequestBody FlightInvoiceDto flightInvoiceDto) {
         service.saveFlightInvoice(flightInvoiceDto);
     }
 }

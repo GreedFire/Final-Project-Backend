@@ -37,7 +37,7 @@ public class SkyscannerClient {
     @Autowired
     private FlightDatabase database;
 
-    private URI prepareUrlForFlights(String originplace, String destinationplace, String outboundpartialdate) {
+    protected URI prepareUrlForFlights(String originplace, String destinationplace, String outboundpartialdate) {
         LOGGER.info("Preparing url for skyscanner search");
         return UriComponentsBuilder.fromHttpUrl(skyscannerConfig.getSkyscannerApiEndpoint() + "browsequotes/v1.0/US/USD/en-US/"
                 + originplace + "/" + destinationplace + "/" + outboundpartialdate)
@@ -45,14 +45,14 @@ public class SkyscannerClient {
 
     }
 
-    private URI prepareUrlForFlightsLocation(String location) {
+    protected URI prepareUrlForFlightsLocation(String location) {
         LOGGER.info("Preparing url for skyscanner locations");
         return UriComponentsBuilder.fromHttpUrl(skyscannerConfig.getSkyscannerApiEndpoint() + "autosuggest/v1.0/US/USD/en-US/")
                 .queryParam("query", location)
                 .build().encode().toUri();
     }
 
-    private HttpEntity<String> prepareHeaders() {
+    protected HttpEntity<String> prepareHeaders() {
         //Set the headers you need send
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-RapidAPI-Host", skyscannerConfig.getSkyscannerHeaderHost());

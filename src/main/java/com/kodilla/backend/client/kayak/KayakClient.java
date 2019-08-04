@@ -23,7 +23,6 @@ import java.util.List;
 
 @Component
 public class KayakClient {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(KayakClient.class);
 
     @Autowired
@@ -38,7 +37,7 @@ public class KayakClient {
     @Autowired
     private HotelDatabase database;
 
-    private URI prepareUrlForHotels(int rooms, int citycode, String checkin, String checkout, int adults) {
+    protected URI prepareUrlForHotels(int rooms, int citycode, String checkin, String checkout, int adults) {
         LOGGER.info("Preparing url for hotels search");
         return UriComponentsBuilder.fromHttpUrl(kayakConfig.getKayakApiEndpoint() + "hotels/create-session")
                 .queryParam("rooms", rooms)
@@ -50,14 +49,14 @@ public class KayakClient {
                 .build().encode().toUri();
     }
 
-    private URI prepareUrlForHotelsLocation(String cityName) {
+    protected URI prepareUrlForHotelsLocation(String cityName) {
         LOGGER.info("Preparing url of locations of hotels");
         return UriComponentsBuilder.fromHttpUrl(kayakConfig.getKayakApiEndpoint() + "locations/search")
                 .queryParam("where", cityName)
                 .build().encode().toUri();
     }
 
-    private HttpEntity<String> prepareHeaders() {
+    protected HttpEntity<String> prepareHeaders() {
         //Set the headers you need send
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-RapidAPI-Host", kayakConfig.getKayakHeaderHost());
@@ -66,7 +65,7 @@ public class KayakClient {
         return new HttpEntity<>(headers);
     }
 
-    //==================================================================================================================
+//    //==================================================================================================================
 
     public String getHotels(int rooms, String location, String checkin, String checkout, int adults) {
         String searchId = "";
@@ -102,7 +101,7 @@ public class KayakClient {
             } else {
                 LOGGER.info("Getting location of hotels from Kayak API");
                 ResponseEntity<List<HotelLocationDto>> response = restTemplate.exchange(
-                        prepareUrlForHotelsLocation(location), HttpMethod.GET, prepareHeaders(), new ParameterizedTypeReference<List<HotelLocationDto>>() {
+                        prepareUrlForHotelsLocation(location) , HttpMethod.GET, prepareHeaders(), new ParameterizedTypeReference<List<HotelLocationDto>>() {
                         });
 
                 if (response.getBody() != null && !response.getBody().isEmpty()) {

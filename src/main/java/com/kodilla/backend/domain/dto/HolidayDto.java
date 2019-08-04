@@ -15,7 +15,7 @@ public class HolidayDto {
 
     private List<HotelDto> hotels;
     private List<FlightDto> tripFlights;
-    private List<FlightDto> returnFlight;
+    private List<FlightDto> returnFlights;
 
 
 }

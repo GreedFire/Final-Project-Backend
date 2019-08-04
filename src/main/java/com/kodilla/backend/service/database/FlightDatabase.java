@@ -41,10 +41,6 @@ public class FlightDatabase {
         }
     }
 
-    public Optional<FlightLocationEntity> getFlightLocationByPlaceId(String placeId) {
-        return flightLocationRepo.findByPlaceId(placeId);
-    }
-
     public List<FlightLocationEntity> getFlightLocationByWritedLocation(String writedLocation) {
         return flightLocationRepo.findByWritedLocation(writedLocation);
     }
@@ -55,10 +51,6 @@ public class FlightDatabase {
 
     public List<FlightReponseEntity> getSearchHistory() {
         return flightResponseRepo.findAllBySearchDateAfter(LocalDate.now().minusDays(1));
-    }
-
-    public List<FlightCarriersEntity> getFlightsCariers(long flightResponseId) {
-        return flightCarriersRepo.findByFlightReponseEntity_Id(flightResponseId);
     }
 
     public Optional<FlightReponseEntity> getFlightResponseById(long id) {

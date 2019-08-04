@@ -11,7 +11,6 @@ public class FinalProjectBackendApplication {
 	}
 
 	//TODO:
-	// - (TO DO) facade design pattern
 	// - (TO DO) 65% test coverage
 	// - (FIX M) probably two users will see same carrier after buying because instance is static https://vaadin.com/docs/v8/framework/advanced/advanced-global.html
 	// - (FIX H) probably after refreshing site user will be log out but in database will be log in
