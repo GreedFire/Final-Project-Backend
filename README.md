@@ -11,10 +11,5 @@ Instrukcja:
 7. SWAGGER: http://localhost:8080/swagger-ui.html
 8. TODO LIST in backend project main class
 
-Od autora do Kodilla: 
-Wydaje mi się, że spełniłem warunki opisane w specyfikacji projektu więc wysyłam projekt wcześniej, żeby móc skupić się na egzaminie końcowym, 
-ponieważ zależy mi na szybszym poszukiwaniu pracy przed startem roku szkolnego -> ceny mieszkań.
-Bugi zostały pomniejsze, które nie przeszkadzają w używaniu aplikacji. Naprawię je podczas kontynuowania rozwijania projektu.
-
 
 
