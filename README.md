@@ -1,7 +1,6 @@
 Link backend: https://github.com/GreedFire/Final-Project-Backend
 Link frontend: https://github.com/GreedFire/Final-Project-Frontend
 
-Instrukcja:
 1. Download projects and import them to IDE
 2. Run two project simultaneously
 3. FRONTEND: http://localhost:8081
